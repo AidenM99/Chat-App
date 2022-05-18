@@ -1,7 +1,19 @@
-import { Box, Button } from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import { provider } from "../firebase";
+import { Box, Button } from "@mui/material";
+import { getAuth, signInWithPopup } from "firebase/auth";
 
 const SignIn = () => {
+  async function googleSignIn() {
+    try {
+      const auth = getAuth();
+
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <Box
       alignItems="center"
@@ -28,7 +40,12 @@ const SignIn = () => {
         >
           <ChatBubbleOutlineIcon color="light" sx={{ fontSize: 100 }} />
         </Box>
-        <Button variant="contained" color="secondary" fullWidth>
+        <Button
+          variant="contained"
+          color="secondary"
+          fullWidth
+          onClick={() => googleSignIn()}
+        >
           Sign in with Google
         </Button>
       </Box>
