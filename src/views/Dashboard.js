@@ -1,29 +1,21 @@
-import { Box, Button } from "@mui/material";
-import { getAuth, signOut } from "firebase/auth";
-
-function googleSignOut() {
-  // Sign out of Firebase.
-  signOut(getAuth());
-}
+import Sidebar from "../components/Sidebar";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import { getAuth } from "firebase/auth";
 
 const Dashboard = () => {
+  const [userDetails, setUserDetails] = useState(getAuth().currentUser);
+
   return (
     <Box
       alignItems="center"
-      backgroundColor="bg.main"
+      backgroundColor="bgPrimary.main"
       display="flex"
       height="100vh"
-      justifyContent="center"
       width="100vw"
     >
-      <Button
-        variant="contained"
-        color="secondary"
-        fullWidth
-        onClick={() => googleSignOut()}
-      >
-        Sign out
-      </Button>
+      <Sidebar userDetails={userDetails} />
+      <Box flex="1" height="100vh"></Box>
     </Box>
   );
 };
