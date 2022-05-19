@@ -1,23 +1,35 @@
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import { provider } from "../firebase";
+import { db, provider } from "../firebase";
 import { Box, Button } from "@mui/material";
 import { getAuth, signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignIn = () => {
-  async function googleSignIn() {
+  const googleSignIn = async () => {
     try {
       const auth = getAuth();
 
-      await signInWithPopup(auth, provider);
+      const data = await signInWithPopup(auth, provider);
+
+      saveUserData(data);
     } catch (err) {
       console.error(err);
     }
-  }
+  };
+
+  const saveUserData = async (data) => {
+    await setDoc(doc(db, "users", data.user.uid), {
+      uid: data.user.uid,
+      name: data.user.displayName,
+      email: data.user.email,
+      photoURL: data.user.photoURL,
+    });
+  };
 
   return (
     <Box
       alignItems="center"
-      backgroundColor="bg.main"
+      backgroundColor="bgPrimary.main"
       display="flex"
       height="100vh"
       justifyContent="center"
@@ -30,7 +42,7 @@ const SignIn = () => {
         flexDirection="column"
         padding="3rem"
         borderRadius="10px"
-        sx={{ boxShadow: 5 }}
+        sx={{ boxShadow: 5, mx: "0.5rem" }}
       >
         <Box
           backgroundColor="secondary.main"
