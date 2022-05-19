@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <Box
       alignItems="center"
-      backgroundColor="bg.main"
+      backgroundColor="bgPrimary.main"
       display="flex"
       height="100vh"
       justifyContent="center"
