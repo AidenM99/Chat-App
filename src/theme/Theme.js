@@ -5,6 +5,7 @@ const colors = {
   blurple: "#5865F2",
   white: "#fff",
   grey: "#36393E",
+  darkGrey: "#2c2f33",
 };
 
 const theme = createTheme({
@@ -18,8 +19,16 @@ const theme = createTheme({
     light: {
       main: colors.white,
     },
-    bg: {
+    bgPrimary: {
       main: colors.grey,
+    },
+    bgSecondary: {
+      main: colors.darkGrey,
+    },
+  },
+  typography: {
+    allVariants: {
+      color: colors.white,
     },
   },
 });
