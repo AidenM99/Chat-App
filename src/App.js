@@ -6,8 +6,6 @@ import { getAuth } from "firebase/auth";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-
-
 function App() {
   const [user, loading] = useAuthState(getAuth());
 
