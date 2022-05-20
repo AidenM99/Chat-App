@@ -1,15 +1,15 @@
-import LogOut from "./LogOutButton";
-import CreateChat from "./CreateChatButton";
-import ProfilePicture from "./ProfilePicture";
-import NewChatModal from "./chatModal/ChatModal";
+import TopPanel from "./topPanel/TopPanel";
+import ChatsList from "./chatsList/ChatsList.js";
+import UsersListModal from "./usersListModal/UsersListModal";
 import { db } from "../../firebase";
+import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 const Sidebar = ({ userDetails }) => {
   const [open, setOpen] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  const [chatsList, setChatsList] = useState([]);
 
   const handleOpen = () => setOpen(true);
 
@@ -28,7 +28,7 @@ const Sidebar = ({ userDetails }) => {
           users.push(user.data());
         });
 
-        setUserData(users);
+        setUsersList(users);
       }
 
       retrieveUsers();
@@ -39,26 +39,19 @@ const Sidebar = ({ userDetails }) => {
     <Box
       backgroundColor="bgSecondary.main"
       borderRight="1px solid rgba(255, 255, 255, 0.15)"
+      display="flex"
+      flexDirection="column"
       height="100vh"
       width="18.75rem"
     >
-      <Box
-        alignItems="center"
-        borderBottom="1px solid rgba(255, 255, 255, 0.15)"
-        display="flex"
-        justifyContent="space-between"
-        padding="0.75rem 0.5rem"
-      >
-        <Box display="flex" alignItems="center">
-          <ProfilePicture userDetails={userDetails} />
-          <Typography marginLeft="0.75rem">Your Chats</Typography>
-        </Box>
-        <Box display="flex">
-          <CreateChat handleOpen={handleOpen} />
-          <LogOut />
-        </Box>
-      </Box>
-      <NewChatModal open={open} handleClose={handleClose} userData={userData} />
+      <TopPanel userDetails={userDetails} handleOpen={handleOpen} />
+      <ChatsList chatsList={chatsList} />
+      <UsersListModal
+        open={open}
+        usersList={usersList}
+        setChatsList={setChatsList}
+        handleClose={handleClose}
+      />
     </Box>
   );
 };
