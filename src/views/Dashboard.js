@@ -1,10 +1,9 @@
-import Sidebar from "../components/Sidebar";
-import { useState } from "react";
+import Sidebar from "../components/sidebar/Sidebar";
 import { Box } from "@mui/material";
 import { getAuth } from "firebase/auth";
 
 const Dashboard = () => {
-  const [userDetails, setUserDetails] = useState(getAuth().currentUser);
+  const userDetails = getAuth().currentUser;
 
   return (
     <Box
