@@ -1,39 +1,15 @@
 import TopPanel from "./topPanel/TopPanel";
 import ChatsList from "./chatsList/ChatsList.js";
 import UsersListModal from "./usersListModal/UsersListModal";
-import { db } from "../../firebase";
+import { useState } from "react";
 import { Box } from "@mui/material";
-import { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
-const Sidebar = ({ userDetails }) => {
+const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const [usersList, setUsersList] = useState([]);
-  const [chatsList, setChatsList] = useState([]);
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
-
-  useEffect(() => {
-    if (open) {
-      async function retrieveUsers() {
-        const allUsers = await getDocs(
-          query(collection(db, "users"), orderBy("name"))
-        );
-
-        const users = [];
-
-        allUsers.forEach((user) => {
-          users.push(user.data());
-        });
-
-        setUsersList(users);
-      }
-
-      retrieveUsers();
-    }
-  }, [open]);
 
   return (
     <Box
@@ -44,14 +20,9 @@ const Sidebar = ({ userDetails }) => {
       height="100vh"
       width="18.75rem"
     >
-      <TopPanel userDetails={userDetails} handleOpen={handleOpen} />
-      <ChatsList chatsList={chatsList} />
-      <UsersListModal
-        open={open}
-        usersList={usersList}
-        setChatsList={setChatsList}
-        handleClose={handleClose}
-      />
+      <TopPanel handleOpen={handleOpen} />
+      <ChatsList />
+      {open ? <UsersListModal handleClose={handleClose} /> : null}
     </Box>
   );
 };
