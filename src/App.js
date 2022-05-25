@@ -5,6 +5,7 @@ import Dashboard from "./views/Dashboard";
 import { getAuth } from "firebase/auth";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [user, loading] = useAuthState(getAuth());
@@ -19,7 +20,9 @@ function App() {
   if (user) {
     return (
       <ThemeProvider theme={theme}>
-        <Dashboard />
+        <Router>
+          <Dashboard />
+        </Router>
       </ThemeProvider>
     );
   }
