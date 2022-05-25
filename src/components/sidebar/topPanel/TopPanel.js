@@ -3,17 +3,17 @@ import ProfilePicture from "./ProfilePicture";
 import CreateChat from "./CreateChatButton";
 import { Box, Typography } from "@mui/material";
 
-const TopPanel = ({ userDetails, handleOpen }) => {
+const TopPanel = ({ handleOpen }) => {
   return (
     <Box
       alignItems="center"
       borderBottom="1px solid rgba(255, 255, 255, 0.15)"
       display="flex"
       justifyContent="space-between"
-      padding="0.75rem 0.5rem"
+      sx={{ p: 1 }}
     >
       <Box display="flex" alignItems="center">
-        <ProfilePicture userDetails={userDetails} />
+        <ProfilePicture />
         <Typography marginLeft="0.75rem">Your Chats</Typography>
       </Box>
       <Box display="flex">
