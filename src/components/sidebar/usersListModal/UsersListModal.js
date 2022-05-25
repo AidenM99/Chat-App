@@ -1,13 +1,36 @@
 import UserData from "./UserData";
-import { getAuth } from "firebase/auth";
 import { StyledUsersList } from "./styles";
 import { Box, Modal, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../../../firebase";
+import { getAuth } from "firebase/auth";
 
-const UsersListModal = ({ open, usersList, setChatsList, handleClose }) => {
+const UsersListModal = ({ handleClose }) => {
+  const [usersList, setUsersList] = useState([]);
+
+  useEffect(() => {
+    async function retrieveUsers() {
+      const allUsers = await getDocs(
+        query(collection(db, "users"), orderBy("displayName"))
+      );
+
+      const users = [];
+
+      allUsers.forEach((user) => {
+        users.push(user.data());
+      });
+
+      setUsersList(users);
+    }
+
+    retrieveUsers();
+  }, []);
+
   return (
     <Box>
       <Modal
-        open={open}
+        open={true}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -33,13 +56,9 @@ const UsersListModal = ({ open, usersList, setChatsList, handleClose }) => {
             Create New Chat
           </Typography>
           <StyledUsersList dense>
-            {usersList.map((data) =>
-              data.uid === getAuth().currentUser.uid ? null : (
-                <UserData
-                  data={data}
-                  key={data.uid}
-                  setChatsList={setChatsList}
-                />
+            {usersList.map((userData, index) =>
+              userData.uid === getAuth().currentUser.uid ? null : (
+                <UserData key={index} userData={userData} />
               )
             )}
           </StyledUsersList>
