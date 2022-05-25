@@ -3,7 +3,6 @@ import { Box, IconButton } from "@mui/material";
 import { getAuth, signOut } from "firebase/auth";
 
 function googleSignOut() {
-  // Sign out of Firebase.
   signOut(getAuth());
 }
 
