@@ -1,10 +1,10 @@
 import UserData from "./UserData";
-import { StyledUsersList } from "./styles";
-import { Box, Modal, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
+import { StyledUsersList } from "./styles";
+import { useEffect, useState } from "react";
+import { Box, Modal, Typography } from "@mui/material";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 const UsersListModal = ({ handleClose }) => {
   const [usersList, setUsersList] = useState([]);
@@ -42,7 +42,7 @@ const UsersListModal = ({ handleClose }) => {
           position="absolute"
           top="50%"
           sx={{
-            p: "0.5rem",
+            p: 5,
             boxShadow: 24,
             transform: "translate(-50%, -50%)",
           }}
@@ -51,7 +51,7 @@ const UsersListModal = ({ handleClose }) => {
             id="modal-modal-title"
             variant="h6"
             textAlign="center"
-            sx={{ mt: "0.5rem", mb: "1rem" }}
+            sx={{ mb: 5 }}
           >
             Create New Chat
           </Typography>
