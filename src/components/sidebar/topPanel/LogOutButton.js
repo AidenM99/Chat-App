@@ -1,6 +1,7 @@
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Box, IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
+import { Box, IconButton } from "@mui/material";
 
 function googleSignOut() {
   signOut(getAuth());
@@ -8,11 +9,13 @@ function googleSignOut() {
 
 const LogOut = () => {
   return (
-    <Box>
-      <IconButton onClick={() => googleSignOut()}>
-        <LogoutIcon color="light" fontSize="small" />
-      </IconButton>
-    </Box>
+    <Link to={"/"} style={{ color: "inherit", textDecoration: "none" }}>
+      <Box>
+        <IconButton onClick={() => googleSignOut()}>
+          <LogoutIcon color="light" fontSize="small" />
+        </IconButton>
+      </Box>
+    </Link>
   );
 };
 
