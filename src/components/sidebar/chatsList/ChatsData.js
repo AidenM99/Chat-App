@@ -1,6 +1,6 @@
-import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 const ChatsData = ({ chatData }) => {
   const userId = Object.keys(chatData.data.members).filter(
