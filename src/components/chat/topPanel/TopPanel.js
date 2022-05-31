@@ -7,7 +7,7 @@ const TopPanel = ({ chatData }) => {
       borderBottom="1px solid rgba(255, 255, 255, 0.15)"
       height="57px"
       width="100%"
-      sx={{ p: 1 }}
+      sx={{ px: 2, py: 1 }}
     >
       <RecipientInfo chatData={chatData} />
     </Box>
