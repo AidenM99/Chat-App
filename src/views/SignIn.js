@@ -32,7 +32,6 @@ const SignIn = () => {
       displayName: data.user.displayName,
       email: data.user.email,
       photoURL: data.user.photoURL,
-      chats: [],
     });
   };
 
