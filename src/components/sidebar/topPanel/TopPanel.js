@@ -14,7 +14,9 @@ const TopPanel = ({ handleOpen }) => {
     >
       <Box display="flex" alignItems="center">
         <ProfilePicture />
-        <Typography marginLeft="1rem">Your Chats</Typography>
+        <Typography fontWeight="500" sx={{ ml: 2 }}>
+          Your Chats
+        </Typography>
       </Box>
       <Box display="flex">
         <CreateChat handleOpen={handleOpen} />
