@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import TopPanel from "./topPanel/TopPanel";
-import ChatInput from "./bottomPanel/ChatInput";
 import ChatContent from "./chatContent/ChatContent";
+import BottomPanel from "./bottomPanel/BottomPanel";
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -38,7 +38,7 @@ const Chat = () => {
         <>
           <TopPanel chatData={chatData} />
           <ChatContent chatId={chatId} />
-          <ChatInput chatId={chatId} />
+          <BottomPanel chatId={chatId} />
         </>
       ) : null}
     </Box>
