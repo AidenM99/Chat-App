@@ -1,3 +1,7 @@
+import Message from "./Message";
+import { db } from "../../../firebase";
+import { useEffect, useState } from "react";
+import { StyledChatContent } from "./styles";
 import {
   collection,
   limit,
@@ -5,10 +9,6 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../../../firebase";
-import Message from "./Message";
-import { StyledChatContent } from "./styles";
 
 const ChatContent = ({ chatId }) => {
   const [messages, setMessages] = useState([]);
