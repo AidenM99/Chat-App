@@ -3,25 +3,14 @@ import { getAuth } from "firebase/auth";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import {
   addDoc,
-  arrayUnion,
   collection,
-  doc,
   getDocs,
   query,
   serverTimestamp,
-  updateDoc,
   where,
 } from "firebase/firestore";
 
 const UserData = ({ userData }) => {
-  const updateChats = async (chatDocId) => {
-    const userRef = doc(db, "users", getAuth().currentUser.uid);
-
-    await updateDoc(userRef, {
-      chats: arrayUnion(chatDocId),
-    });
-  };
-
   const isExistingChat = async (userData) => {
     const chatsColRef = collection(db, "chats");
 
@@ -39,7 +28,7 @@ const UserData = ({ userData }) => {
 
   const addNewPrivateChat = async (userData) => {
     if (!(await isExistingChat(userData))) {
-      const chatsDocRef = await addDoc(collection(db, "chats"), {
+      addDoc(collection(db, "chats"), {
         members: {
           [getAuth().currentUser.uid]: {
             inChat: true,
@@ -55,9 +44,8 @@ const UserData = ({ userData }) => {
 
         createdBy: getAuth().currentUser.displayName,
         createdAt: serverTimestamp(),
+        lastMessage: undefined,
       });
-
-      updateChats(chatsDocRef.id);
     }
   };
 
