@@ -1,6 +1,12 @@
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
-import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import {
+  Avatar,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 
 const ChatsData = ({ chatData }) => {
   const userId = Object.keys(chatData.data.members).filter(
@@ -8,6 +14,10 @@ const ChatsData = ({ chatData }) => {
   );
 
   const userInfo = chatData.data.members[userId];
+
+  const lastMessage = chatData.data.lastMessage
+    ? chatData.data.lastMessage.trim()
+    : "Chat Created";
 
   return (
     <Link
@@ -18,9 +28,24 @@ const ChatsData = ({ chatData }) => {
         <ListItemAvatar>
           <Avatar alt="profile-picture" src={userInfo.profilePicture}></Avatar>
         </ListItemAvatar>
-        <ListItemText primaryTypographyProps={{ noWrap: true }}>
-          {userInfo.displayName}
-        </ListItemText>
+        <ListItemText
+          primary={
+            <Typography fontWeight="500" noWrap={true}>
+              {userInfo.displayName}
+            </Typography>
+          }
+          secondary={
+            <Typography
+              color="lowLight.main"
+              fontSize="0.85rem"
+              noWrap={true}
+              width="50%"
+            >
+              {lastMessage}
+            </Typography>
+          }
+          primaryTypographyProps={{ noWrap: true }}
+        ></ListItemText>
       </ListItem>
     </Link>
   );
