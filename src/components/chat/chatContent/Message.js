@@ -7,7 +7,7 @@ const Message = ({ message }) => {
       <Box sx={{ mr: 2 }}>
         <Avatar alt="profile-picture" src={message.profilePicture}></Avatar>
       </Box>
-      <Box width="95%" sx={{ mt: -0.35 }}>
+      <Box display="flex" flexDirection="column" width="95%" sx={{ mt: -0.35 }}>
         <Typography fontWeight="500">{message.sentBy}</Typography>
         {message.messageText ? (
           <Typography color="lowLight.main">{message.messageText}</Typography>

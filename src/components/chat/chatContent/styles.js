@@ -32,7 +32,7 @@ export const StyledMessageContainer = styled(Box)(({ theme }) => ({
 
 export const StyledImage = styled(Box)(() => ({
   height: "auto",
-  maxHeight: "350px",
-  maxWidth: "350px",
+  maxHeight: "100%",
+  maxWidth: "100%",
   objectFit: "contain",
 }));
