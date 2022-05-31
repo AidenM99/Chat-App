@@ -29,3 +29,10 @@ export const StyledMessageContainer = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.bgSecondary.main,
   },
 }));
+
+export const StyledImage = styled(Box)(() => ({
+  height: "auto",
+  maxHeight: "350px",
+  maxWidth: "350px",
+  objectFit: "contain",
+}));
