@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 
 const BottomPanel = ({ chatId }) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
