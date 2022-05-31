@@ -13,9 +13,9 @@ const RecipientInfo = ({ chatData }) => {
       <Avatar
         alt="profile-picture"
         src={userInfo.profilePicture}
-        sx={{ marginRight: "1rem" }}
+        sx={{ mr: 2 }}
       />
-      <Typography>{userInfo.displayName}</Typography>
+      <Typography fontWeight="500">{userInfo.displayName}</Typography>
     </Box>
   );
 };
