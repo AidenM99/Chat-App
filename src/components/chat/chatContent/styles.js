@@ -8,18 +8,6 @@ export const StyledChatContent = styled(Box)(({ theme }) => ({
   overflowWrap: "anywhere",
   overflowX: "hidden",
   overflowY: "auto",
-  "&::-webkit-scrollbar": {
-    width: "14px",
-  },
-  "&::-webkit-scrollbar-track": {
-    display: "none",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    background: theme.palette.secondary.main,
-    backgroundClip: "padding-box",
-    border: "4px solid transparent",
-    borderRadius: "9999px",
-  },
 }));
 
 export const StyledMessageContainer = styled(Box)(({ theme }) => ({
