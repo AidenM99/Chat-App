@@ -1,10 +1,14 @@
 import { Alert, Snackbar } from "@mui/material";
 
-const FilePickerAlert = ({ snackbarOpen, setSnackbarOpen }) => {
+const FilePickerAlert = ({ snackbarActive, setSnackbarActive }) => {
+  const closeSnackbar = () => {
+    setSnackbarActive(false);
+  };
+
   return (
     <Snackbar
-      open={snackbarOpen}
-      onClose={() => setSnackbarOpen(false)}
+      open={snackbarActive}
+      onClose={closeSnackbar}
       autoHideDuration={3000}
       anchorOrigin={{
         vertical: "top",
