@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { Box, IconButton } from "@mui/material";
 
-function googleSignOut() {
+const googleSignOut = () => {
   signOut(getAuth());
-}
+};
 
 const LogOut = () => {
   return (
     <Link to={"/"} style={{ color: "inherit", textDecoration: "none" }}>
       <Box>
-        <IconButton onClick={() => googleSignOut()}>
+        <IconButton onClick={googleSignOut}>
           <LogoutIcon color="light" fontSize="small" />
         </IconButton>
       </Box>
