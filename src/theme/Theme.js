@@ -10,6 +10,26 @@ const colors = {
 };
 
 const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          "*::-webkit-scrollbar": {
+            width: "14px",
+          },
+          "*::-webkit-scrollbar-track": {
+            display: "none",
+          },
+          "*::-webkit-scrollbar-thumb": {
+            background: colors.blurple,
+            backgroundClip: "padding-box",
+            border: "4px solid transparent",
+            borderRadius: "9999px",
+          },
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: colors.notQuiteBlack,
