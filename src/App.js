@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   const [user, loading] = useAuthState(getAuth());
@@ -13,6 +14,7 @@ function App() {
   if (loading) {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Loading />
       </ThemeProvider>
     );
@@ -20,6 +22,7 @@ function App() {
   if (user) {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Router>
           <Dashboard />
         </Router>
@@ -28,6 +31,7 @@ function App() {
   }
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <SignIn />
     </ThemeProvider>
   );
