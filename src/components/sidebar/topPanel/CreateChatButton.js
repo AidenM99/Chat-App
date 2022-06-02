@@ -1,10 +1,10 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, IconButton } from "@mui/material";
 
-const CreateChat = ({ handleOpen }) => {
+const CreateChat = ({ openModal }) => {
   return (
     <Box>
-      <IconButton onClick={() => handleOpen()}>
+      <IconButton onClick={openModal}>
         <AddIcon color="light" fontSize="small" />
       </IconButton>
     </Box>

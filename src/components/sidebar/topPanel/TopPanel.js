@@ -3,7 +3,7 @@ import ProfilePicture from "./ProfilePicture";
 import CreateChat from "./CreateChatButton";
 import { Box, Typography } from "@mui/material";
 
-const TopPanel = ({ handleOpen }) => {
+const TopPanel = ({ openModal }) => {
   return (
     <Box
       alignItems="center"
@@ -19,7 +19,7 @@ const TopPanel = ({ handleOpen }) => {
         </Typography>
       </Box>
       <Box display="flex">
-        <CreateChat handleOpen={handleOpen} />
+        <CreateChat openModal={openModal} />
         <LogOut />
       </Box>
     </Box>
