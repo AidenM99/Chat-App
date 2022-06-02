@@ -1,7 +1,7 @@
 import RecipientInfo from "./RecipientInfo";
 import { Box } from "@mui/material";
 
-const TopPanel = ({ chatData }) => {
+const TopPanel = ({ chatId, chatData }) => {
   return (
     <Box
       borderBottom="1px solid rgba(255, 255, 255, 0.15)"
@@ -9,7 +9,7 @@ const TopPanel = ({ chatData }) => {
       width="100%"
       sx={{ px: 2, py: 1 }}
     >
-      <RecipientInfo chatData={chatData} />
+      <RecipientInfo chatId={chatId} chatData={chatData} />
     </Box>
   );
 };
