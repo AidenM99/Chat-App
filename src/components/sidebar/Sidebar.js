@@ -7,9 +7,13 @@ import { Box } from "@mui/material";
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
+  const openModal = () => {
+    setOpen(true);
+  };
 
-  const handleClose = () => setOpen(false);
+  const closeModal = () => {
+    setOpen(false);
+  };
 
   return (
     <Box
@@ -20,9 +24,9 @@ const Sidebar = () => {
       height="100vh"
       width="18.75rem"
     >
-      <TopPanel handleOpen={handleOpen} />
+      <TopPanel openModal={openModal} />
       <ChatsList />
-      {open ? <UsersListModal handleClose={handleClose} /> : null}
+      {open ? <UsersListModal closeModal={closeModal} /> : null}
     </Box>
   );
 };
