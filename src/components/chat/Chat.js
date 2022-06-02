@@ -1,11 +1,11 @@
+import TopPanel from "./topPanel/TopPanel";
+import ChatInput from "./chatInput/ChatInput";
+import ChatContent from "./chatContent/ChatContent";
 import { db } from "../../firebase";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import TopPanel from "./topPanel/TopPanel";
-import ChatContent from "./chatContent/ChatContent";
-import BottomPanel from "./bottomPanel/BottomPanel";
 
 const Chat = () => {
   const { chatId } = useParams();
@@ -36,9 +36,9 @@ const Chat = () => {
     >
       {Object.keys(chatData).length > 0 ? (
         <>
-          <TopPanel chatData={chatData} />
+          <TopPanel chatId={chatId} chatData={chatData} />
           <ChatContent chatId={chatId} />
-          <BottomPanel chatId={chatId} />
+          <ChatInput chatId={chatId} />
         </>
       ) : null}
     </Box>
