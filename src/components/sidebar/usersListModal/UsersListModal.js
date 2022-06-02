@@ -1,12 +1,11 @@
 import UserData from "./UserData";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
-import { StyledUsersList } from "./styles";
 import { useEffect, useState } from "react";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, List, Modal, Typography } from "@mui/material";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
-const UsersListModal = ({ handleClose }) => {
+const UsersListModal = ({ closeModal }) => {
   const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const UsersListModal = ({ handleClose }) => {
     <Box>
       <Modal
         open={true}
-        onClose={handleClose}
+        onClose={closeModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -55,13 +54,16 @@ const UsersListModal = ({ handleClose }) => {
           >
             Create New Chat
           </Typography>
-          <StyledUsersList dense>
+          <List
+            dense
+            sx={{ height: "200px", overflow: "auto", width: "275px" }}
+          >
             {usersList.map((userData, index) =>
               userData.uid === getAuth().currentUser.uid ? null : (
                 <UserData key={index} userData={userData} />
               )
             )}
-          </StyledUsersList>
+          </List>
         </Box>
       </Modal>
     </Box>
