@@ -1,64 +1,46 @@
 import EmojiIcon from "./EmojiIcon";
 import SendMsgIcon from "./SendMsgIcon";
 import FilePickerIcon from "./FilePickerIcon";
-import FilePickerAlert from "./FilePickerAlert";
+import FilePickerAlert from "../../alerts/FilePickerAlert";
 import { useState } from "react";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 import { StyledTextField } from "./styles";
 import { Box, InputAdornment } from "@mui/material";
+import { getOtherPrivateChatMember } from "../../../utils/utils";
 import {
   addDoc,
   collection,
   doc,
-  getDoc,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 
-const ChatInput = ({ chatId }) => {
+const ChatInput = ({ chatId, chatData }) => {
   const [value, setValue] = useState("");
-  const [snackbarActive, setSnackbarActive] = useState(false);
+  const [alertActive, setAlertActive] = useState(false);
 
-  const getLastMessage = (messageSnap) => {
-    if (messageSnap.data().messageText) return messageSnap.data().messageText;
-    return `${messageSnap.data().sentBy} sent an image`;
-  };
+  const saveMessage = async (newImageMessage) => {
+    const chatDocRef = doc(db, "chats", chatId);
 
-  const getRecipient = (chatSnap) => {
-    const userId = Object.keys(chatSnap.data().members).filter(
-      (key) => key !== getAuth().currentUser.uid
-    );
+    if (!newImageMessage) {
+      const messagesRef = collection(chatDocRef, "messages");
 
-    return userId[0];
-  };
+      await addDoc(messagesRef, {
+        messageText: value,
+        sentAt: serverTimestamp(),
+        sentBy: getAuth().currentUser.displayName,
+        profilePicture: getAuth().currentUser.photoURL,
+      });
+    }
 
-  const updateChatStatus = async (chatsDocRef, chatsColRef, newMessage) => {
-    const messageRef = doc(chatsColRef, newMessage.id);
-
-    const messageSnap = await getDoc(messageRef);
-
-    const chatSnap = await getDoc(chatsDocRef);
-
-    await updateDoc(chatsDocRef, {
-      lastMessage: getLastMessage(messageSnap),
-      [`members.${getRecipient(chatSnap)}.isHidingChat`]: false,
+    await updateDoc(chatDocRef, {
+      lastActive: serverTimestamp(),
+      lastMessage: newImageMessage
+        ? `${getAuth().currentUser.displayName} sent an image`
+        : value,
+      [`memberInfo.${getOtherPrivateChatMember(chatData)}.isHidingChat`]: false,
     });
-  };
-
-  const saveMessage = async () => {
-    const chatsDocRef = doc(db, "chats", chatId);
-
-    const chatsColRef = collection(chatsDocRef, "messages");
-
-    const newMessage = await addDoc(chatsColRef, {
-      messageText: value,
-      sentAt: serverTimestamp(),
-      sentBy: getAuth().currentUser.displayName,
-      profilePicture: getAuth().currentUser.photoURL,
-    });
-
-    updateChatStatus(chatsDocRef, chatsColRef, newMessage);
   };
 
   const handleKeyPress = (e) => {
@@ -67,11 +49,9 @@ const ChatInput = ({ chatId }) => {
       !e.shiftKey &&
       value.trim() !== ""
     ) {
-      saveMessage();
-
-      setValue("");
-
       e.preventDefault();
+      saveMessage();
+      setValue("");
     }
   };
 
@@ -97,8 +77,8 @@ const ChatInput = ({ chatId }) => {
             <InputAdornment position="start">
               <FilePickerIcon
                 chatId={chatId}
-                setSnackbarActive={setSnackbarActive}
-                updateChatStatus={updateChatStatus}
+                saveMessage={saveMessage}
+                setAlertActive={setAlertActive}
               />
             </InputAdornment>
           ),
@@ -112,8 +92,8 @@ const ChatInput = ({ chatId }) => {
         }}
       ></StyledTextField>
       <FilePickerAlert
-        snackbarActive={snackbarActive}
-        setSnackbarActive={setSnackbarActive}
+        alertActive={alertActive}
+        setAlertActive={setAlertActive}
       />
     </Box>
   );
