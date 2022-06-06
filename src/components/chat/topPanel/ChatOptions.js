@@ -1,7 +1,7 @@
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import { StyledMenu } from "./styles";
-import { IconButton, MenuItem } from "@mui/material";
+import { Box, IconButton, MenuItem } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { db } from "../../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -22,12 +22,12 @@ const ChatOptions = ({ chatId }) => {
     const chatRef = doc(db, "chats", chatId);
 
     await updateDoc(chatRef, {
-      [`members.${getAuth().currentUser.uid}.isHidingChat`]: true,
+      [`memberInfo.${getAuth().currentUser.uid}.isHidingChat`]: true,
     });
   };
 
   return (
-    <>
+    <Box>
       <IconButton onClick={openMenu}>
         <MoreHorizIcon color="light" />
       </IconButton>
@@ -40,7 +40,7 @@ const ChatOptions = ({ chatId }) => {
           <MenuItem onClick={deleteChat}>Remove Chat</MenuItem>
         </Link>
       </StyledMenu>
-    </>
+    </Box>
   );
 };
 

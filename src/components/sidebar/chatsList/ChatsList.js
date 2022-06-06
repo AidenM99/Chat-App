@@ -3,7 +3,13 @@ import { db } from "../../../firebase";
 import { List } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  orderBy,
+} from "firebase/firestore";
 
 const ChatsList = () => {
   const [chatsList, setChatsList] = useState([]);
@@ -11,8 +17,8 @@ const ChatsList = () => {
   const subscribeChats = () => {
     const chatsQuery = query(
       collection(db, "chats"),
-      where(`members.${getAuth().currentUser.uid}.inChat`, "==", true),
-      where(`members.${getAuth().currentUser.uid}.isHidingChat`, "==", false)
+      where("members", "array-contains", getAuth().currentUser.uid),
+      orderBy("lastActive", "desc")
     );
 
     return onSnapshot(chatsQuery, (snapshot) => {
@@ -34,9 +40,16 @@ const ChatsList = () => {
 
   return (
     <List sx={{ overflow: "auto", flex: "1" }}>
-      {chatsList.map((chatData, index) => (
-        <ChatsData key={index} chatData={chatData} />
-      ))}
+      {chatsList
+        .filter((chat) => {
+          return (
+            chat.data.memberInfo[getAuth().currentUser.uid].isHidingChat ===
+            false
+          );
+        })
+        .map((chatData, index) => (
+          <ChatsData key={index} chatData={chatData} />
+        ))}
     </List>
   );
 };
