@@ -18,28 +18,26 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const FilePickerIcon = ({ chatId, setSnackbarActive, updateChatStatus }) => {
+const FilePickerIcon = ({ chatId, saveMessage, setAlertActive }) => {
   const fileInput = useRef(null);
 
   const saveImageMessage = async (image) => {
     try {
-      const chatsDocRef = doc(db, "chats", chatId);
+      const chatDocRef = doc(db, "chats", chatId);
 
-      const chatsColRef = collection(chatsDocRef, "messages");
+      const messagesRef = collection(chatDocRef, "messages");
 
       // Add a temporary image in the firestore database that will be updated later
-      const newMessage = await addDoc(chatsColRef, {
+      const newImageMessageRef = await addDoc(messagesRef, {
         imageURL: "https://www.google.com/images/spin-32.gif?a",
         sentAt: serverTimestamp(),
         sentBy: getAuth().currentUser.displayName,
         profilePicture: getAuth().currentUser.photoURL,
       });
 
-      updateChatStatus(chatsDocRef, chatsColRef, newMessage);
-
       // Add the image to cloud storage
       const filePath = `${getAuth().currentUser.uid}/${chatId}/${
-        newMessage.id
+        newImageMessageRef.id
       }`;
       const newImageRef = ref(getStorage(), filePath);
       const fileSnapshot = await uploadBytesResumable(newImageRef, image);
@@ -48,10 +46,12 @@ const FilePickerIcon = ({ chatId, setSnackbarActive, updateChatStatus }) => {
       const publicImageUrl = await getDownloadURL(newImageRef);
 
       // Update the temporary image URL with the generated public image URL
-      await updateDoc(newMessage, {
+      await updateDoc(newImageMessageRef, {
         imageURL: publicImageUrl,
         storageUri: fileSnapshot.metadata.fullPath,
       });
+
+      saveMessage(newImageMessageRef);
     } catch (error) {
       console.error(
         "There was an error uploading a file to Cloud Storage:",
@@ -72,7 +72,7 @@ const FilePickerIcon = ({ chatId, setSnackbarActive, updateChatStatus }) => {
         (uri) => {
           resolve(uri);
         },
-        "blob"
+        "file"
       );
     });
 
@@ -80,7 +80,7 @@ const FilePickerIcon = ({ chatId, setSnackbarActive, updateChatStatus }) => {
     const file = e.target.files[0];
 
     if (!file.type.match("image.*")) {
-      openSnackbar();
+      openAlert();
 
       return;
     }
@@ -92,8 +92,8 @@ const FilePickerIcon = ({ chatId, setSnackbarActive, updateChatStatus }) => {
     saveImageMessage(image);
   };
 
-  const openSnackbar = () => {
-    setSnackbarActive(true);
+  const openAlert = () => {
+    setAlertActive(true);
   };
   return (
     <>
