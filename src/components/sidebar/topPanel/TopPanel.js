@@ -1,9 +1,9 @@
-import LogOut from "./LogOutButton";
+import LogOut from "./LogOut";
+import CreateChat from "./CreateChat";
 import ProfilePicture from "./ProfilePicture";
-import CreateChat from "./CreateChatButton";
 import { Box, Typography } from "@mui/material";
 
-const TopPanel = ({ openModal }) => {
+const TopPanel = () => {
   return (
     <Box
       alignItems="center"
@@ -19,7 +19,7 @@ const TopPanel = ({ openModal }) => {
         </Typography>
       </Box>
       <Box display="flex">
-        <CreateChat openModal={openModal} />
+        <CreateChat />
         <LogOut />
       </Box>
     </Box>
