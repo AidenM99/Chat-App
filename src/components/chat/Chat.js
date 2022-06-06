@@ -9,18 +9,17 @@ import { doc, getDoc } from "firebase/firestore";
 
 const Chat = () => {
   const { chatId } = useParams();
-
   const [chatData, setChatData] = useState({});
 
+  const findChat = async () => {
+    const chatDocRef = doc(db, "chats", chatId);
+
+    const chatDocSnap = await getDoc(chatDocRef);
+
+    setChatData(chatDocSnap.data());
+  };
+
   useEffect(() => {
-    const findChat = async () => {
-      const chatDocRef = doc(db, "chats", chatId);
-
-      const chatDocSnap = await getDoc(chatDocRef);
-
-      setChatData(chatDocSnap.data());
-    };
-
     findChat();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +37,7 @@ const Chat = () => {
         <>
           <TopPanel chatId={chatId} chatData={chatData} />
           <ChatContent chatId={chatId} />
-          <ChatInput chatId={chatId} />
+          <ChatInput chatId={chatId} chatData={chatData} />
         </>
       ) : null}
     </Box>
