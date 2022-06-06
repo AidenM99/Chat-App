@@ -1,5 +1,8 @@
-import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
+import {
+  getLastChatMessage,
+  getOtherPrivateChatMember,
+} from "../../../utils/utils";
 import {
   Avatar,
   ListItem,
@@ -9,15 +12,11 @@ import {
 } from "@mui/material";
 
 const ChatsData = ({ chatData }) => {
-  const userId = Object.keys(chatData.data.members).filter(
-    (key) => key !== getAuth().currentUser.uid
-  );
+  const recipientId = getOtherPrivateChatMember(chatData.data);
 
-  const userInfo = chatData.data.members[userId];
+  const recipientInfo = chatData.data.memberInfo[recipientId];
 
-  const lastMessage = chatData.data.lastMessage
-    ? chatData.data.lastMessage.trim()
-    : "Chat Created";
+  const lastMessage = getLastChatMessage(chatData.data);
 
   return (
     <Link
@@ -26,12 +25,15 @@ const ChatsData = ({ chatData }) => {
     >
       <ListItem button disablePadding sx={{ p: 1 }}>
         <ListItemAvatar>
-          <Avatar alt="profile-picture" src={userInfo.profilePicture}></Avatar>
+          <Avatar
+            alt="profile-picture"
+            src={recipientInfo.profilePicture}
+          ></Avatar>
         </ListItemAvatar>
         <ListItemText
           primary={
             <Typography fontWeight="500" noWrap={true}>
-              {userInfo.displayName}
+              {recipientInfo.displayName}
             </Typography>
           }
           secondary={
