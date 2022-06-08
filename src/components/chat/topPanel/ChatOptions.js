@@ -1,4 +1,5 @@
 import UsersList from "../../usersList/UsersList";
+import Members from "../../members/Members";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import { useContext } from "react";
@@ -20,6 +21,7 @@ const ChatOptions = ({ chatData, chatId }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [usersModalOpen, setUsersModalOpen] = useState(false);
+  const [membersModalOpen, setMembersModalOpen] = useState(false);
 
   const openMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -32,6 +34,8 @@ const ChatOptions = ({ chatData, chatId }) => {
   const openUsersModal = () => {
     setUsersModalOpen(true);
 
+    closeMenu();
+
     setSelectedUsers([]);
   };
 
@@ -39,6 +43,16 @@ const ChatOptions = ({ chatData, chatId }) => {
     setUsersModalOpen(false);
 
     setSelectedUsers([]);
+  };
+
+  const openMembersModal = () => {
+    setMembersModalOpen(true);
+
+    closeMenu();
+  };
+
+  const closeMembersModal = () => {
+    setMembersModalOpen(false);
   };
 
   const hideChat = async () => {
@@ -103,6 +117,7 @@ const ChatOptions = ({ chatData, chatId }) => {
         ) : (
           <Box>
             <MenuItem onClick={openUsersModal}>Add User</MenuItem>
+            <MenuItem onClick={openMembersModal}>View Members</MenuItem>
             <MenuItem onClick={leaveGroup} component={Link} to={"/"}>
               Leave Group
             </MenuItem>
@@ -115,7 +130,13 @@ const ChatOptions = ({ chatData, chatId }) => {
             chatType={chatData.type}
             userDataClickHandler={userDataClickHandler}
             handleGroupButtonConfirm={handleGroupButtonConfirm}
+            updating={true}
           />
+        </Box>
+      </Modal>
+      <Modal open={membersModalOpen} onClose={closeMembersModal}>
+        <Box>
+          <Members chatId={chatId} />
         </Box>
       </Modal>
     </Box>
