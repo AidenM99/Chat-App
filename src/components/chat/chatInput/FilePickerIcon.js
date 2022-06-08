@@ -1,9 +1,11 @@
 import Resizer from "react-image-file-resizer";
+import FilePickerAlert from "../../alerts/FilePickerAlert";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useRef, useState } from "react";
+import { useContext } from "react";
 import { db } from "../../../firebase";
-import { getAuth } from "firebase/auth";
+import { useRef, useState } from "react";
 import { IconButton } from "@mui/material";
+import { UserContext } from "../../../utils/UserContext";
 import {
   getStorage,
   ref,
@@ -17,9 +19,9 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import FilePickerAlert from "../../alerts/FilePickerAlert";
 
 const FilePickerIcon = ({ chatId, saveMessage }) => {
+  const { user } = useContext(UserContext);
   const fileInput = useRef(null);
   const [alertActive, setAlertActive] = useState(false);
 
@@ -33,14 +35,12 @@ const FilePickerIcon = ({ chatId, saveMessage }) => {
       const newImageMessageRef = await addDoc(messagesRef, {
         imageURL: "https://www.google.com/images/spin-32.gif?a",
         sentAt: serverTimestamp(),
-        sentBy: getAuth().currentUser.displayName,
-        profilePicture: getAuth().currentUser.photoURL,
+        sentBy: user.displayName,
+        profilePicture: user.photoURL,
       });
 
       // Add the image to cloud storage
-      const filePath = `${getAuth().currentUser.uid}/${chatId}/${
-        newImageMessageRef.id
-      }`;
+      const filePath = `${user.uid}/${chatId}/${newImageMessageRef.id}`;
       const newImageRef = ref(getStorage(), filePath);
       const fileSnapshot = await uploadBytesResumable(newImageRef, image);
 

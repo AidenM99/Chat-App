@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
+import { UserContext } from "./utils/UserContext";
 
 function App() {
   const [user, loading] = useAuthState(getAuth());
@@ -24,7 +25,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <Dashboard />
+          <UserContext.Provider value={{ user }}>
+            <Dashboard />
+          </UserContext.Provider>
         </Router>
       </ThemeProvider>
     );

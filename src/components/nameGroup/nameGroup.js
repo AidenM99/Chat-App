@@ -1,7 +1,7 @@
-import { StyledTextField } from "./styles";
-import { Box, Button, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import GroupChatNameAlert from "../alerts/GroupChatNameAlert";
+import { StyledTextField } from "./styles";
+import { useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 
 const NameGroup = ({ addNewGroupChat }) => {
   const [alertActive, setAlertActive] = useState(false);

@@ -1,9 +1,10 @@
 import AddIcon from "@mui/icons-material/Add";
 import UsersList from "../../usersList/UsersList";
 import { useState } from "react";
+import { useContext } from "react";
 import { db } from "../../../firebase";
 import { StyledMenu } from "./styles";
-import { getAuth } from "firebase/auth";
+import { UserContext } from "../../../utils/UserContext";
 import { Box, IconButton, MenuItem, Modal } from "@mui/material";
 import {
   addDoc,
@@ -18,12 +19,11 @@ import {
 import NameGroup from "../../nameGroup/nameGroup";
 
 const CreateChat = () => {
+  const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [chatType, setChatType] = useState(null);
-  const [selectedUsers, setSelectedUsers] = useState([
-    { uid: getAuth().currentUser.uid },
-  ]);
   const [usersModalOpen, setUsersModalOpen] = useState(false);
+  const [selectedUsers, setSelectedUsers] = useState([{ uid: user.uid }]);
   const [nameGroupModalOpen, setNameGroupModalOpen] = useState(false);
 
   const openMenu = (e) => {
@@ -37,7 +37,7 @@ const CreateChat = () => {
   const openUsersModal = () => {
     setUsersModalOpen(true);
 
-    setSelectedUsers([{ uid: getAuth().currentUser.uid }]);
+    setSelectedUsers([{ uid: user.uid }]);
   };
 
   const closeUsersModal = () => {
@@ -87,7 +87,7 @@ const CreateChat = () => {
       const chatRef = doc(db, "chats", chat.id);
 
       await updateDoc(chatRef, {
-        [`memberInfo.${getAuth().currentUser.uid}.isHidingChat`]: false,
+        [`memberInfo.${user.uid}.isHidingChat`]: false,
       });
     });
   };
@@ -97,7 +97,7 @@ const CreateChat = () => {
 
     const chatsQuery = query(
       chatsColRef,
-      where(`memberInfo.${getAuth().currentUser.uid}.inChat`, "==", true),
+      where(`memberInfo.${user.uid}.inChat`, "==", true),
       where(`memberInfo.${userData.uid}.inChat`, "==", true)
     );
 
@@ -118,13 +118,13 @@ const CreateChat = () => {
   const addNewPrivateChat = async (userData) => {
     if (!(await isExistingChat(userData))) {
       addDoc(collection(db, "chats"), {
-        members: [getAuth().currentUser.uid, userData.uid],
+        members: [user.uid, userData.uid],
         memberInfo: {
-          [getAuth().currentUser.uid]: {
+          [user.uid]: {
             inChat: true,
             isHidingChat: false,
-            displayName: getAuth().currentUser.displayName,
-            profilePicture: getAuth().currentUser.photoURL,
+            displayName: user.displayName,
+            profilePicture: user.photoURL,
           },
           [userData.uid]: {
             inChat: true,
@@ -136,7 +136,7 @@ const CreateChat = () => {
         lastMessage: null,
         lastActive: serverTimestamp(),
         createdAt: serverTimestamp(),
-        createdBy: getAuth().currentUser.displayName,
+        createdBy: user.displayName,
         type: 1,
       });
     }
@@ -151,7 +151,7 @@ const CreateChat = () => {
       lastMessage: null,
       lastActive: serverTimestamp(),
       createdAt: serverTimestamp(),
-      createdBy: getAuth().currentUser.displayName,
+      createdBy: user.displayName,
       type: 2,
     });
 

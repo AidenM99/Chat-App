@@ -2,9 +2,10 @@ import EmojiIcon from "./EmojiIcon";
 import SendMsgIcon from "./SendMsgIcon";
 import FilePickerIcon from "./FilePickerIcon";
 import { useState } from "react";
+import { useContext } from "react";
 import { db } from "../../../firebase";
-import { getAuth } from "firebase/auth";
 import { StyledTextField } from "./styles";
+import { UserContext } from "../../../utils/UserContext";
 import { Box, InputAdornment } from "@mui/material";
 import { getOtherPrivateChatMember } from "../../../utils/utils";
 import {
@@ -16,6 +17,7 @@ import {
 } from "firebase/firestore";
 
 const ChatInput = ({ chatId, chatData }) => {
+  const { user } = useContext(UserContext);
   const [value, setValue] = useState("");
 
   const saveMessage = async (newImageMessage) => {
@@ -27,8 +29,8 @@ const ChatInput = ({ chatId, chatData }) => {
       await addDoc(messagesRef, {
         messageText: value,
         sentAt: serverTimestamp(),
-        sentBy: getAuth().currentUser.displayName,
-        profilePicture: getAuth().currentUser.photoURL,
+        sentBy: user.displayName,
+        profilePicture: user.photoURL,
       });
     }
 
@@ -36,7 +38,7 @@ const ChatInput = ({ chatId, chatData }) => {
       await updateDoc(chatDocRef, {
         lastActive: serverTimestamp(),
         lastMessage: newImageMessage
-          ? `${getAuth().currentUser.displayName} sent an image`
+          ? `${user.displayName} sent an image`
           : value,
         [`memberInfo.${getOtherPrivateChatMember(
           chatData
@@ -46,7 +48,7 @@ const ChatInput = ({ chatId, chatData }) => {
       await updateDoc(chatDocRef, {
         lastActive: serverTimestamp(),
         lastMessage: newImageMessage
-          ? `${getAuth().currentUser.displayName} sent an image`
+          ? `${user.displayName} sent an image`
           : value,
       });
     }

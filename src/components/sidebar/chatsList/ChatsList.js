@@ -1,8 +1,9 @@
 import ChatData from "./ChatData";
 import { db } from "../../../firebase";
+import { useContext } from "react";
 import { List } from "@mui/material";
-import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
+import { UserContext } from "../../../utils/UserContext";
 import {
   collection,
   query,
@@ -12,12 +13,13 @@ import {
 } from "firebase/firestore";
 
 const ChatsList = () => {
+  const { user } = useContext(UserContext);
   const [chatsList, setChatsList] = useState([]);
 
   const subscribeChats = () => {
     const chatsQuery = query(
       collection(db, "chats"),
-      where("members", "array-contains", getAuth().currentUser.uid),
+      where("members", "array-contains", user.uid),
       orderBy("lastActive", "desc")
     );
 
@@ -26,10 +28,7 @@ const ChatsList = () => {
         snapshot.docs
           .filter((doc) => {
             if (doc.data().type === 1) {
-              return (
-                doc.data().memberInfo[getAuth().currentUser.uid]
-                  .isHidingChat === false
-              );
+              return doc.data().memberInfo[user.uid].isHidingChat === false;
             } else {
               return doc;
             }
@@ -47,6 +46,8 @@ const ChatsList = () => {
     return () => {
       unsubscribeChats();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

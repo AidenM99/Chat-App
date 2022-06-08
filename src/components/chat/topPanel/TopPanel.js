@@ -1,6 +1,6 @@
+import ChatOptions from "./ChatOptions";
 import RecipientInfo from "./RecipientInfo";
 import { Box } from "@mui/material";
-import ChatOptions from "./ChatOptions";
 
 const TopPanel = ({ chatId, chatData }) => {
   return (

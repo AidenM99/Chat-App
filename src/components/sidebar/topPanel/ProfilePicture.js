@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Box } from "@mui/material";
-import { getAuth } from "firebase/auth";
+import { UserContext } from "../../../utils/UserContext";
 
-const profilePicture = () => {
+const ProfilePicture = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <Box height="40px" width="40px">
       <Box
@@ -9,7 +12,7 @@ const profilePicture = () => {
         borderRadius="50%"
         component="img"
         height="100%"
-        src={getAuth().currentUser.photoURL}
+        src={user.photoURL}
         referrerpolicy="no-referrer"
         width="100%"
       ></Box>
@@ -17,4 +20,4 @@ const profilePicture = () => {
   );
 };
 
-export default profilePicture;
+export default ProfilePicture;

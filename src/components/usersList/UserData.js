@@ -1,5 +1,5 @@
-import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { useState } from "react";
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 const UserData = ({ userData, userDataClickHandler }) => {
   const [active, setActive] = useState(false);

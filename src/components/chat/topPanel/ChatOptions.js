@@ -1,9 +1,12 @@
+import UsersList from "../../usersList/UsersList";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
-import { StyledMenu } from "./styles";
-import { Box, IconButton, MenuItem, Modal } from "@mui/material";
-import { getAuth } from "firebase/auth";
+import { useContext } from "react";
 import { db } from "../../../firebase";
+import { StyledMenu } from "./styles";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../../utils/UserContext";
+import { Box, IconButton, MenuItem, Modal } from "@mui/material";
 import {
   doc,
   updateDoc,
@@ -11,10 +14,9 @@ import {
   getDoc,
   arrayUnion,
 } from "firebase/firestore";
-import { Link } from "react-router-dom";
-import UsersList from "../../usersList/UsersList";
 
 const ChatOptions = ({ chatData, chatId }) => {
+  const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [usersModalOpen, setUsersModalOpen] = useState(false);
@@ -43,7 +45,7 @@ const ChatOptions = ({ chatData, chatId }) => {
     const chatRef = doc(db, "chats", chatId);
 
     await updateDoc(chatRef, {
-      [`memberInfo.${getAuth().currentUser.uid}.isHidingChat`]: true,
+      [`memberInfo.${user.uid}.isHidingChat`]: true,
     });
   };
 
@@ -51,7 +53,7 @@ const ChatOptions = ({ chatData, chatId }) => {
     const chatRef = doc(db, "chats", chatId);
 
     await updateDoc(chatRef, {
-      members: arrayRemove(getAuth().currentUser.uid),
+      members: arrayRemove(user.uid),
     });
   };
 
