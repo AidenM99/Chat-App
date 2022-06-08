@@ -7,6 +7,7 @@ const colors = {
   notQuiteWhite: "#d3d3d3",
   grey: "#36393E",
   darkGrey: "#2c2f33",
+  golden: "#fbbb04",
 };
 
 const theme = createTheme({
@@ -48,6 +49,9 @@ const theme = createTheme({
     },
     bgSecondary: {
       main: colors.darkGrey,
+    },
+    groupChat: {
+      main: colors.golden,
     },
   },
   typography: {
