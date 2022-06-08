@@ -10,6 +10,7 @@ const UsersList = ({
   chatType,
   userDataClickHandler,
   handleGroupButtonConfirm,
+  updating,
 }) => {
   const { user } = useContext(UserContext);
   const [usersList, setUsersList] = useState([]);
@@ -46,7 +47,7 @@ const UsersList = ({
         textAlign="center"
         sx={{ mb: 3.5 }}
       >
-        Create New Chat
+        {updating ? "Add User" : "Create New Chat"}
       </Typography>
       <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
         {usersList.map((userData, index) =>
