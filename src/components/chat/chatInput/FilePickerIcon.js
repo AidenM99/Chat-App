@@ -1,6 +1,6 @@
 import Resizer from "react-image-file-resizer";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 import { IconButton } from "@mui/material";
@@ -17,9 +17,11 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+import FilePickerAlert from "../../alerts/FilePickerAlert";
 
-const FilePickerIcon = ({ chatId, saveMessage, setAlertActive }) => {
+const FilePickerIcon = ({ chatId, saveMessage }) => {
   const fileInput = useRef(null);
+  const [alertActive, setAlertActive] = useState(false);
 
   const saveImageMessage = async (image) => {
     try {
@@ -95,11 +97,16 @@ const FilePickerIcon = ({ chatId, saveMessage, setAlertActive }) => {
   const openAlert = () => {
     setAlertActive(true);
   };
+
   return (
     <>
       <IconButton onClick={() => fileInput.current.click()}>
         <AddCircleIcon color="light"></AddCircleIcon>
       </IconButton>
+      <FilePickerAlert
+        alertActive={alertActive}
+        setAlertActive={setAlertActive}
+      />
       <input
         ref={fileInput}
         type="file"

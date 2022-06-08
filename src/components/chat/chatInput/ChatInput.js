@@ -1,7 +1,6 @@
 import EmojiIcon from "./EmojiIcon";
 import SendMsgIcon from "./SendMsgIcon";
 import FilePickerIcon from "./FilePickerIcon";
-import FilePickerAlert from "../../alerts/FilePickerAlert";
 import { useState } from "react";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
@@ -18,7 +17,6 @@ import {
 
 const ChatInput = ({ chatId, chatData }) => {
   const [value, setValue] = useState("");
-  const [alertActive, setAlertActive] = useState(false);
 
   const saveMessage = async (newImageMessage) => {
     const chatDocRef = doc(db, "chats", chatId);
@@ -34,13 +32,24 @@ const ChatInput = ({ chatId, chatData }) => {
       });
     }
 
-    await updateDoc(chatDocRef, {
-      lastActive: serverTimestamp(),
-      lastMessage: newImageMessage
-        ? `${getAuth().currentUser.displayName} sent an image`
-        : value,
-      [`memberInfo.${getOtherPrivateChatMember(chatData)}.isHidingChat`]: false,
-    });
+    if (chatData.type === 1) {
+      await updateDoc(chatDocRef, {
+        lastActive: serverTimestamp(),
+        lastMessage: newImageMessage
+          ? `${getAuth().currentUser.displayName} sent an image`
+          : value,
+        [`memberInfo.${getOtherPrivateChatMember(
+          chatData
+        )}.isHidingChat`]: false,
+      });
+    } else {
+      await updateDoc(chatDocRef, {
+        lastActive: serverTimestamp(),
+        lastMessage: newImageMessage
+          ? `${getAuth().currentUser.displayName} sent an image`
+          : value,
+      });
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -75,11 +84,7 @@ const ChatInput = ({ chatId, chatData }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <FilePickerIcon
-                chatId={chatId}
-                saveMessage={saveMessage}
-                setAlertActive={setAlertActive}
-              />
+              <FilePickerIcon chatId={chatId} saveMessage={saveMessage} />
             </InputAdornment>
           ),
 
@@ -91,10 +96,6 @@ const ChatInput = ({ chatId, chatData }) => {
           ),
         }}
       ></StyledTextField>
-      <FilePickerAlert
-        alertActive={alertActive}
-        setAlertActive={setAlertActive}
-      />
     </Box>
   );
 };
