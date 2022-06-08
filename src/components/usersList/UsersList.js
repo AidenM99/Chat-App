@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { Box, Button, List, Typography } from "@mui/material";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
-const UsersListModal = ({ chatType, userDataClickHandler }) => {
+const UsersList = ({
+  chatType,
+  userDataClickHandler,
+  handleGroupButtonConfirm,
+}) => {
   const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
@@ -14,13 +18,7 @@ const UsersListModal = ({ chatType, userDataClickHandler }) => {
         query(collection(db, "users"), orderBy("displayName"))
       );
 
-      const users = [];
-
-      allUsers.forEach((user) => {
-        users.push(user.data());
-      });
-
-      setUsersList(users);
+      setUsersList(allUsers.docs.map((doc) => doc.data()));
     }
 
     retrieveUsers();
@@ -65,6 +63,7 @@ const UsersListModal = ({ chatType, userDataClickHandler }) => {
           color="secondary"
           fullWidth
           sx={{ mt: 3.5 }}
+          onClick={handleGroupButtonConfirm}
         >
           Confirm
         </Button>
@@ -73,4 +72,4 @@ const UsersListModal = ({ chatType, userDataClickHandler }) => {
   );
 };
 
-export default UsersListModal;
+export default UsersList;

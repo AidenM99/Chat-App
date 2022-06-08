@@ -1,3 +1,4 @@
+import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
 import {
   getLastChatMessage,
@@ -11,11 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 
-const ChatsData = ({ chatData }) => {
-  const recipientId = getOtherPrivateChatMember(chatData.data);
-
-  const recipientInfo = chatData.data.memberInfo[recipientId];
-
+const ChatData = ({ chatData }) => {
+  const recipientId =
+    chatData.data.type === 1 && getOtherPrivateChatMember(chatData.data);
+  const recipientInfo =
+    chatData.data.type === 1 && chatData.data.memberInfo[recipientId];
   const lastMessage = getLastChatMessage(chatData.data);
 
   return (
@@ -25,15 +26,23 @@ const ChatsData = ({ chatData }) => {
     >
       <ListItem button disablePadding sx={{ p: 1 }}>
         <ListItemAvatar>
-          <Avatar
-            alt="profile-picture"
-            src={recipientInfo.profilePicture}
-          ></Avatar>
+          {chatData.data.type === 1 ? (
+            <Avatar
+              alt="profile-picture"
+              src={recipientInfo.profilePicture}
+            ></Avatar>
+          ) : (
+            <Avatar alt="group-icon" sx={{ bgcolor: "groupChat.main" }}>
+              <GroupIcon />
+            </Avatar>
+          )}
         </ListItemAvatar>
         <ListItemText
           primary={
             <Typography fontWeight="500" noWrap={true}>
-              {recipientInfo.displayName}
+              {chatData.data.type === 1
+                ? recipientInfo.displayName
+                : chatData.data.groupName}
             </Typography>
           }
           secondary={
@@ -53,4 +62,4 @@ const ChatsData = ({ chatData }) => {
   );
 };
 
-export default ChatsData;
+export default ChatData;

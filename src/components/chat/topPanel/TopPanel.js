@@ -14,7 +14,7 @@ const TopPanel = ({ chatId, chatData }) => {
       sx={{ px: 2, py: 1 }}
     >
       <RecipientInfo chatData={chatData} />
-      <ChatOptions chatId={chatId} />
+      <ChatOptions chatData={chatData} chatId={chatId} />
     </Box>
   );
 };

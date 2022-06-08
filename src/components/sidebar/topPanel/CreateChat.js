@@ -15,12 +15,16 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import NameGroup from "../../nameGroup/nameGroup";
 
 const CreateChat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [chatType, setChatType] = useState(null);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([
+    { uid: getAuth().currentUser.uid },
+  ]);
   const [usersModalOpen, setUsersModalOpen] = useState(false);
+  const [nameGroupModalOpen, setNameGroupModalOpen] = useState(false);
 
   const openMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -32,10 +36,22 @@ const CreateChat = () => {
 
   const openUsersModal = () => {
     setUsersModalOpen(true);
+
+    setSelectedUsers([{ uid: getAuth().currentUser.uid }]);
   };
 
   const closeUsersModal = () => {
     setUsersModalOpen(false);
+  };
+
+  const openNameGroupModal = () => {
+    closeUsersModal();
+
+    setNameGroupModalOpen(true);
+  };
+
+  const closeNameGroupModal = () => {
+    setNameGroupModalOpen(false);
   };
 
   const changeChatType = (type) => {
@@ -44,11 +60,25 @@ const CreateChat = () => {
     openUsersModal();
   };
 
+  const addUserToGroupChat = (userData) => {
+    const filterSelectedUsers = selectedUsers.filter(
+      (user) => user.uid === userData.uid
+    );
+
+    if (filterSelectedUsers.length === 0) {
+      setSelectedUsers((prevState) => [...prevState, userData]);
+    } else {
+      setSelectedUsers((prevState) => {
+        return prevState.filter((user) => user.uid !== userData.uid);
+      });
+    }
+  };
+
   const userDataClickHandler = (userData) => {
     if (chatType === 1) {
       addNewPrivateChat(userData);
     } else {
-      setSelectedUsers((prevState) => [...prevState, userData]);
+      addUserToGroupChat(userData);
     }
   };
 
@@ -81,6 +111,10 @@ const CreateChat = () => {
     }
   };
 
+  const handleGroupButtonConfirm = () => {
+    openNameGroupModal();
+  };
+
   const addNewPrivateChat = async (userData) => {
     if (!(await isExistingChat(userData))) {
       addDoc(collection(db, "chats"), {
@@ -103,8 +137,25 @@ const CreateChat = () => {
         lastActive: serverTimestamp(),
         createdAt: serverTimestamp(),
         createdBy: getAuth().currentUser.displayName,
+        type: 1,
       });
     }
+
+    closeUsersModal();
+  };
+
+  const addNewGroupChat = (groupName) => {
+    addDoc(collection(db, "chats"), {
+      groupName: groupName,
+      members: selectedUsers.map((user) => user.uid),
+      lastMessage: null,
+      lastActive: serverTimestamp(),
+      createdAt: serverTimestamp(),
+      createdBy: getAuth().currentUser.displayName,
+      type: 2,
+    });
+
+    closeNameGroupModal();
   };
 
   return (
@@ -126,7 +177,13 @@ const CreateChat = () => {
           <UsersList
             chatType={chatType}
             userDataClickHandler={userDataClickHandler}
+            handleGroupButtonConfirm={handleGroupButtonConfirm}
           />
+        </Box>
+      </Modal>
+      <Modal open={nameGroupModalOpen} onClose={closeNameGroupModal}>
+        <Box>
+          <NameGroup addNewGroupChat={addNewGroupChat} />
         </Box>
       </Modal>
     </Box>
