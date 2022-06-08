@@ -1,7 +1,7 @@
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton } from "@mui/material";
 
-const SendMsgIcon = ({ handleKeyPress }) => {
+const SendMessage = ({ handleKeyPress }) => {
   return (
     <IconButton id="sendMessage" onClick={handleKeyPress}>
       <SendIcon color="light"></SendIcon>
@@ -9,4 +9,4 @@ const SendMsgIcon = ({ handleKeyPress }) => {
   );
 };
 
-export default SendMsgIcon;
+export default SendMessage;

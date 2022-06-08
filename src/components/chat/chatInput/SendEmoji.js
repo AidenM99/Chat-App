@@ -6,7 +6,7 @@ import { Picker } from "emoji-mart";
 import { Popover } from "@mui/material";
 import { Box, IconButton } from "@mui/material";
 
-const EmojiIcon = ({ value, setValue }) => {
+const SendEmoji = ({ value, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const onEmojiClick = (emoji) => {
@@ -54,4 +54,4 @@ const EmojiIcon = ({ value, setValue }) => {
   );
 };
 
-export default EmojiIcon;
+export default SendEmoji;

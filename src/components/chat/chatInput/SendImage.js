@@ -20,7 +20,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const FilePickerIcon = ({ chatId, saveMessage }) => {
+const SendImage = ({ chatId, saveMessage }) => {
   const { user } = useContext(UserContext);
   const fileInput = useRef(null);
   const [alertActive, setAlertActive] = useState(false);
@@ -117,4 +117,4 @@ const FilePickerIcon = ({ chatId, saveMessage }) => {
   );
 };
 
-export default FilePickerIcon;
+export default SendImage;

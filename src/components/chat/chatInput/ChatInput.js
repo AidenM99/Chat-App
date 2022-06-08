@@ -1,6 +1,6 @@
-import EmojiIcon from "./EmojiIcon";
-import SendMsgIcon from "./SendMsgIcon";
-import FilePickerIcon from "./FilePickerIcon";
+import SendMessage from "./SendMessage";
+import SendImage from "./SendImage";
+import SendEmoji from "./SendEmoji";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
@@ -86,14 +86,14 @@ const ChatInput = ({ chatId, chatData }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <FilePickerIcon chatId={chatId} saveMessage={saveMessage} />
+              <SendImage chatId={chatId} saveMessage={saveMessage} />
             </InputAdornment>
           ),
 
           endAdornment: (
             <InputAdornment position="end">
-              <SendMsgIcon handleKeyPress={handleKeyPress} />
-              <EmojiIcon value={value} setValue={setValue} />
+              <SendMessage handleKeyPress={handleKeyPress} />
+              <SendEmoji value={value} setValue={setValue} />
             </InputAdornment>
           ),
         }}
