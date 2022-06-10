@@ -24,3 +24,8 @@ export const StyledImage = styled(Box)(() => ({
   maxWidth: "100%",
   objectFit: "contain",
 }));
+
+export const MediaContainer = styled(Box)(() => ({
+  maxHeight: "350px",
+  maxWidth: "350px",
+}));
