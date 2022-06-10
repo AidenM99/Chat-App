@@ -16,7 +16,7 @@ import {
   arrayUnion,
 } from "firebase/firestore";
 
-const ChatOptions = ({ chatData, chatId }) => {
+const ChatOptions = ({ chatData }) => {
   const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -56,7 +56,7 @@ const ChatOptions = ({ chatData, chatId }) => {
   };
 
   const hideChat = async () => {
-    const chatRef = doc(db, "chats", chatId);
+    const chatRef = doc(db, "chats", chatData.id);
 
     await updateDoc(chatRef, {
       [`memberInfo.${user.uid}.isHidingChat`]: true,
@@ -64,7 +64,7 @@ const ChatOptions = ({ chatData, chatId }) => {
   };
 
   const leaveGroup = async () => {
-    const chatRef = doc(db, "chats", chatId);
+    const chatRef = doc(db, "chats", chatData.id);
 
     await updateDoc(chatRef, {
       members: arrayRemove(user.uid),
@@ -72,23 +72,23 @@ const ChatOptions = ({ chatData, chatId }) => {
   };
 
   const userDataClickHandler = async (userData) => {
-    const docRef = doc(db, "chats", chatId);
-    const docSnap = await getDoc(docRef);
+    const chatRef = doc(db, "chats", chatData.id);
+    const chatSnap = await getDoc(chatRef);
 
-    const currentMembers = docSnap.data().members;
+    const currentMembers = chatSnap.data().members;
     const isCurrentMember = currentMembers.find(
-      (user) => user === userData.uid
+      (user) => user === userData.data.uid
     );
 
     if (isCurrentMember) return;
-    setSelectedUsers((prevState) => [...prevState, userData]);
+    setSelectedUsers((prevState) => [...prevState, userData.data]);
   };
 
   const addUsersToGroupChat = () => {
-    const docRef = doc(db, "chats", chatId);
+    const chatRef = doc(db, "chats", chatData.id);
 
     selectedUsers.map(async (user) => {
-      await updateDoc(docRef, {
+      await updateDoc(chatRef, {
         members: arrayUnion(user.uid),
       });
     });
@@ -110,7 +110,7 @@ const ChatOptions = ({ chatData, chatId }) => {
         open={Boolean(anchorEl)}
         onClose={closeMenu}
       >
-        {chatData.type === 1 ? (
+        {chatData.data.type === 1 ? (
           <MenuItem onClick={hideChat} component={Link} to={"/"}>
             Remove Chat
           </MenuItem>
@@ -127,7 +127,7 @@ const ChatOptions = ({ chatData, chatId }) => {
       <Modal open={usersModalOpen} onClose={closeUsersModal}>
         <Box>
           <UsersList
-            chatType={chatData.type}
+            chatType={chatData.data.type}
             userDataClickHandler={userDataClickHandler}
             handleGroupButtonConfirm={handleGroupButtonConfirm}
             updating={true}
@@ -136,7 +136,7 @@ const ChatOptions = ({ chatData, chatId }) => {
       </Modal>
       <Modal open={membersModalOpen} onClose={closeMembersModal}>
         <Box>
-          <Members chatId={chatId} />
+          <Members chatData={chatData} />
         </Box>
       </Modal>
     </Box>

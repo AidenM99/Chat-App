@@ -21,7 +21,11 @@ const UsersList = ({
         query(collection(db, "users"), orderBy("displayName"))
       );
 
-      setUsersList(allUsers.docs.map((doc) => doc.data()));
+      setUsersList(
+        allUsers.docs.map((doc) => {
+          return { id: doc.id, data: doc.data() };
+        })
+      );
     }
 
     retrieveUsers();
@@ -50,10 +54,10 @@ const UsersList = ({
         {updating ? "Add User" : "Create New Chat"}
       </Typography>
       <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
-        {usersList.map((userData, index) =>
-          userData.uid === user.uid ? null : (
+        {usersList.map((userData) =>
+          userData.data.uid === user.uid ? null : (
             <UserData
-              key={index}
+              key={userData.id}
               userData={userData}
               userDataClickHandler={userDataClickHandler}
             />

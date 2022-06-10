@@ -10,7 +10,7 @@ import {
   query,
 } from "firebase/firestore";
 
-const ChatContent = ({ chatId }) => {
+const ChatContent = ({ chatData }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -21,24 +21,28 @@ const ChatContent = ({ chatId }) => {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chatId]);
+  }, [chatData.id]);
 
   const subscribeMessages = () => {
     const recentMessagesQuery = query(
-      collection(db, "chats", chatId, "messages"),
+      collection(db, "chats", chatData.id, "messages"),
       orderBy("sentAt", "desc"),
-      limit(12)
+      limit(30)
     );
 
     return onSnapshot(recentMessagesQuery, (snapshot) => {
-      setMessages(snapshot.docs.map((doc) => doc.data()));
+      setMessages(
+        snapshot.docs.map((doc) => {
+          return { id: doc.id, data: doc.data() };
+        })
+      );
     });
   };
 
   return (
     <StyledChatContent>
-      {messages.map((message, index) => (
-        <Message key={index} message={message} />
+      {messages.map((message) => (
+        <Message key={message.id} message={message} />
       ))}
     </StyledChatContent>
   );

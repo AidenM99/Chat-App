@@ -12,11 +12,11 @@ const Chat = () => {
   const [chatData, setChatData] = useState({});
 
   const findChat = async () => {
-    const chatDocRef = doc(db, "chats", chatId);
+    const chatRef = doc(db, "chats", chatId);
 
-    const chatDocSnap = await getDoc(chatDocRef);
+    const chatSnap = await getDoc(chatRef);
 
-    setChatData(chatDocSnap.data());
+    setChatData({ id: chatSnap.id, data: chatSnap.data() });
   };
 
   useEffect(() => {
@@ -35,9 +35,9 @@ const Chat = () => {
     >
       {Object.keys(chatData).length > 0 ? (
         <>
-          <TopPanel chatId={chatId} chatData={chatData} />
-          <ChatContent chatId={chatId} />
-          <ChatInput chatId={chatId} chatData={chatData} />
+          <TopPanel chatData={chatData} />
+          <ChatContent chatData={chatData} />
+          <ChatInput chatData={chatData} />
         </>
       ) : null}
     </Box>

@@ -1,5 +1,4 @@
 import "emoji-mart/css/emoji-mart.css";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { useState } from "react";
 import { Picker } from "emoji-mart";
@@ -11,8 +10,6 @@ const SendEmoji = ({ value, setValue }) => {
 
   const onEmojiClick = (emoji) => {
     setValue(value + emoji.native);
-
-    setAnchorEl(null);
   };
 
   const openEmojiPicker = (e) => {
@@ -22,8 +19,6 @@ const SendEmoji = ({ value, setValue }) => {
   const closeEmojiPicker = () => {
     setAnchorEl(null);
   };
-
-  const matches = useMediaQuery("(max-width:900px)");
 
   return (
     <Box>
@@ -46,8 +41,9 @@ const SendEmoji = ({ value, setValue }) => {
         <Picker
           onSelect={onEmojiClick}
           theme="dark"
+          set="twitter"
           color="#5865F2"
-          emojiSize={matches ? 18 : 30}
+          emojiSize={20}
         />
       </Popover>
     </Box>

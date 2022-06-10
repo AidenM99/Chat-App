@@ -20,14 +20,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const SendImage = ({ chatId, saveMessage }) => {
+const SendImage = ({ chatData, updateChat }) => {
   const { user } = useContext(UserContext);
   const fileInput = useRef(null);
   const [alertActive, setAlertActive] = useState(false);
 
   const saveImageMessage = async (image) => {
     try {
-      const chatDocRef = doc(db, "chats", chatId);
+      const chatDocRef = doc(db, "chats", chatData.id);
 
       const messagesRef = collection(chatDocRef, "messages");
 
@@ -40,7 +40,7 @@ const SendImage = ({ chatId, saveMessage }) => {
       });
 
       // Add the image to cloud storage
-      const filePath = `${user.uid}/${chatId}/${newImageMessageRef.id}`;
+      const filePath = `${user.uid}/${chatData.id}/${newImageMessageRef.id}`;
       const newImageRef = ref(getStorage(), filePath);
       const fileSnapshot = await uploadBytesResumable(newImageRef, image);
 
@@ -53,7 +53,7 @@ const SendImage = ({ chatId, saveMessage }) => {
         storageUri: fileSnapshot.metadata.fullPath,
       });
 
-      saveMessage(newImageMessageRef);
+      updateChat(newImageMessageRef);
     } catch (error) {
       console.error(
         "There was an error uploading a file to Cloud Storage:",

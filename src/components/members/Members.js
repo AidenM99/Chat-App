@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import { Box, List, Typography } from "@mui/material";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
-const Members = ({ chatId }) => {
+const Members = ({ chatData }) => {
   const [currentMembers, setCurrentMembers] = useState([]);
 
   const getMemberData = async (id) => {
     const userRef = doc(db, "users", id);
     const userSnap = await getDoc(userRef);
 
-    return userSnap.data();
+    return { id: userSnap.id, data: userSnap.data() };
   };
 
   const subscribeMembers = () => {
-    const chatRef = doc(db, "chats", chatId);
+    const chatRef = doc(db, "chats", chatData.id);
 
     return onSnapshot(chatRef, async (snapshot) => {
       const memberData = await Promise.all(
@@ -59,8 +59,8 @@ const Members = ({ chatId }) => {
         Current Members
       </Typography>
       <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
-        {currentMembers.map((member, index) => (
-          <MemberData key={index} member={member} />
+        {currentMembers.map((member) => (
+          <MemberData key={member.id} member={member} />
         ))}
       </List>
     </Box>

@@ -4,12 +4,13 @@ import { getOtherPrivateChatMember } from "../../../utils/utils";
 
 const RecipientInfo = ({ chatData }) => {
   const recipientId =
-    chatData.type === 1 && getOtherPrivateChatMember(chatData);
-  const recipientInfo = chatData.type === 1 && chatData.memberInfo[recipientId];
+    chatData.data.type === 1 && getOtherPrivateChatMember(chatData);
+  const recipientInfo =
+    chatData.data.type === 1 && chatData.data.memberInfo[recipientId];
 
   return (
     <Box alignItems="center" display="flex">
-      {chatData.type === 1 ? (
+      {chatData.data.type === 1 ? (
         <Avatar
           alt="profile-picture"
           src={recipientInfo.profilePicture}
@@ -21,7 +22,9 @@ const RecipientInfo = ({ chatData }) => {
         </Avatar>
       )}
       <Typography fontWeight="500">
-        {chatData.type === 1 ? recipientInfo.displayName : chatData.groupName}
+        {chatData.data.type === 1
+          ? recipientInfo.displayName
+          : chatData.data.groupName}
       </Typography>
     </Box>
   );

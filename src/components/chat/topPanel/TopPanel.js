@@ -2,7 +2,7 @@ import ChatOptions from "./ChatOptions";
 import RecipientInfo from "./RecipientInfo";
 import { Box } from "@mui/material";
 
-const TopPanel = ({ chatId, chatData }) => {
+const TopPanel = ({ chatData }) => {
   return (
     <Box
       alignItems="center"
@@ -14,7 +14,7 @@ const TopPanel = ({ chatId, chatData }) => {
       sx={{ px: 2, py: 1 }}
     >
       <RecipientInfo chatData={chatData} />
-      <ChatOptions chatData={chatData} chatId={chatId} />
+      <ChatOptions chatData={chatData} />
     </Box>
   );
 };

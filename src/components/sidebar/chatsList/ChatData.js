@@ -14,10 +14,10 @@ import {
 
 const ChatData = ({ chatData }) => {
   const recipientId =
-    chatData.data.type === 1 && getOtherPrivateChatMember(chatData.data);
+    chatData.data.type === 1 && getOtherPrivateChatMember(chatData);
   const recipientInfo =
     chatData.data.type === 1 && chatData.data.memberInfo[recipientId];
-  const lastMessage = getLastChatMessage(chatData.data);
+  const lastMessage = getLastChatMessage(chatData);
 
   return (
     <Link

@@ -62,14 +62,14 @@ const CreateChat = () => {
 
   const addUserToGroupChat = (userData) => {
     const filterSelectedUsers = selectedUsers.filter(
-      (user) => user.uid === userData.uid
+      (user) => user.uid === userData.data.uid
     );
 
     if (filterSelectedUsers.length === 0) {
-      setSelectedUsers((prevState) => [...prevState, userData]);
+      setSelectedUsers((prevState) => [...prevState, userData.data]);
     } else {
       setSelectedUsers((prevState) => {
-        return prevState.filter((user) => user.uid !== userData.uid);
+        return prevState.filter((user) => user.uid !== userData.data.uid);
       });
     }
   };
@@ -98,7 +98,7 @@ const CreateChat = () => {
     const chatsQuery = query(
       chatsColRef,
       where(`memberInfo.${user.uid}.inChat`, "==", true),
-      where(`memberInfo.${userData.uid}.inChat`, "==", true)
+      where(`memberInfo.${userData.data.uid}.inChat`, "==", true)
     );
 
     const chatsSnap = await getDocs(chatsQuery);
@@ -118,7 +118,7 @@ const CreateChat = () => {
   const addNewPrivateChat = async (userData) => {
     if (!(await isExistingChat(userData))) {
       addDoc(collection(db, "chats"), {
-        members: [user.uid, userData.uid],
+        members: [user.uid, userData.data.uid],
         memberInfo: {
           [user.uid]: {
             inChat: true,
@@ -126,11 +126,11 @@ const CreateChat = () => {
             displayName: user.displayName,
             profilePicture: user.photoURL,
           },
-          [userData.uid]: {
+          [userData.data.uid]: {
             inChat: true,
             isHidingChat: true,
-            displayName: userData.displayName,
-            profilePicture: userData.photoURL,
+            displayName: userData.data.displayName,
+            profilePicture: userData.data.photoURL,
           },
         },
         lastMessage: null,

@@ -52,8 +52,8 @@ const ChatsList = () => {
 
   return (
     <List sx={{ overflow: "auto", flex: "1" }}>
-      {chatsList.map((chatData, index) => (
-        <ChatData key={index} chatData={chatData} />
+      {chatsList.map((chatData) => (
+        <ChatData key={chatData.id} chatData={chatData} />
       ))}
     </List>
   );

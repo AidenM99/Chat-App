@@ -4,10 +4,10 @@ const MemberData = ({ member }) => {
   return (
     <ListItem divider>
       <ListItemAvatar>
-        <Avatar alt="profile-picture" src={member.photoURL}></Avatar>
+        <Avatar alt="profile-picture" src={member.data.photoURL}></Avatar>
       </ListItemAvatar>
       <ListItemText primaryTypographyProps={{ noWrap: true }}>
-        {member.displayName}
+        {member.data.displayName}
       </ListItemText>
     </ListItem>
   );

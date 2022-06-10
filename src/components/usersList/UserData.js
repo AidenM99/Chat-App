@@ -21,10 +21,10 @@ const UserData = ({ userData, userDataClickHandler }) => {
       }}
     >
       <ListItemAvatar>
-        <Avatar alt="profile-picture" src={userData.photoURL}></Avatar>
+        <Avatar alt="profile-picture" src={userData.data.photoURL}></Avatar>
       </ListItemAvatar>
       <ListItemText primaryTypographyProps={{ noWrap: true }}>
-        {userData.displayName}
+        {userData.data.displayName}
       </ListItemText>
     </ListItem>
   );
