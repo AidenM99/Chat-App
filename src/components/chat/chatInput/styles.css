@@ -1,0 +1,24 @@
+.my-masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -0px;
+  width: auto;
+}
+
+.my-masonry-grid-column {
+  padding-left: 10px;
+  background-clip: padding-box;
+}
+
+.my-masonry-grid-column > img {
+  border: 3px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.my-masonry-grid-column > img:hover {
+  border: 3px solid #5865f2;
+}

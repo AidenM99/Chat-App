@@ -1,6 +1,7 @@
 import SendMessage from "./SendMessage";
 import SendImage from "./SendImage";
 import SendEmoji from "./SendEmoji";
+import SendGif from "./SendGif";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
@@ -12,44 +13,49 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 
-const ChatInput = ({ chatId, chatData }) => {
+const ChatInput = ({ chatData }) => {
   const { user } = useContext(UserContext);
   const [value, setValue] = useState("");
 
-  const saveMessage = async (newImageMessage) => {
-    const chatDocRef = doc(db, "chats", chatId);
+  const saveTextMessage = async () => {
+    const chatRef = doc(db, "chats", chatData.id);
+    const messagesRef = collection(chatRef, "messages");
 
-    if (!newImageMessage) {
-      const messagesRef = collection(chatDocRef, "messages");
+    const newTextMessageRef = await addDoc(messagesRef, {
+      messageText: value,
+      sentAt: serverTimestamp(),
+      sentBy: user.displayName,
+      profilePicture: user.photoURL,
+    });
 
-      await addDoc(messagesRef, {
-        messageText: value,
-        sentAt: serverTimestamp(),
-        sentBy: user.displayName,
-        profilePicture: user.photoURL,
-      });
-    }
+    updateChat(newTextMessageRef);
+  };
 
-    if (chatData.type === 1) {
-      await updateDoc(chatDocRef, {
+  const updateChat = async (newMessageRef) => {
+    const chatRef = doc(db, "chats", chatData.id);
+    const newMessage = await getDoc(newMessageRef);
+
+    if (chatData.data.type === 1) {
+      await updateDoc(chatRef, {
         lastActive: serverTimestamp(),
-        lastMessage: newImageMessage
-          ? `${user.displayName} sent an image`
-          : value,
+        lastMessage: newMessage.data().messageText
+          ? value
+          : `${user.displayName} sent an image`,
         [`memberInfo.${getOtherPrivateChatMember(
           chatData
         )}.isHidingChat`]: false,
       });
     } else {
-      await updateDoc(chatDocRef, {
+      await updateDoc(chatRef, {
         lastActive: serverTimestamp(),
-        lastMessage: newImageMessage
-          ? `${user.displayName} sent an image`
-          : value,
+        lastMessage: newMessage.data().messageText
+          ? value
+          : `${user.displayName} sent an image`,
       });
     }
   };
@@ -61,7 +67,7 @@ const ChatInput = ({ chatId, chatData }) => {
       value.trim() !== ""
     ) {
       e.preventDefault();
-      saveMessage();
+      saveTextMessage();
       setValue("");
     }
   };
@@ -86,13 +92,14 @@ const ChatInput = ({ chatId, chatData }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SendImage chatId={chatId} saveMessage={saveMessage} />
+              <SendImage chatData={chatData} updateChat={updateChat} />
             </InputAdornment>
           ),
 
           endAdornment: (
             <InputAdornment position="end">
               <SendMessage handleKeyPress={handleKeyPress} />
+              <SendGif chatData={chatData} updateChat={updateChat} />
               <SendEmoji value={value} setValue={setValue} />
             </InputAdornment>
           ),

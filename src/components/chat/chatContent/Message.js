@@ -1,24 +1,41 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { StyledMessageContainer, StyledImage } from "./styles";
+import { StyledMessageContainer, StyledImage, MediaContainer } from "./styles";
 
 const Message = ({ message }) => {
   return (
     <StyledMessageContainer sx={{ p: 2 }}>
       <Box sx={{ mr: 2 }}>
-        <Avatar alt="profile-picture" src={message.profilePicture}></Avatar>
+        <Avatar
+          alt="profile-picture"
+          src={message.data.profilePicture}
+        ></Avatar>
       </Box>
       <Box display="flex" flexDirection="column" width="95%" sx={{ mt: -0.35 }}>
-        <Typography fontWeight="500">{message.sentBy}</Typography>
-        {message.messageText ? (
-          <Typography color="lowLight.main">{message.messageText}</Typography>
-        ) : (
-          <Box maxHeight="350px" maxWidth="350px">
+        <Typography fontWeight="500">{message.data.sentBy}</Typography>
+        {message.data.messageText && (
+          <Typography color="lowLight.main">
+            {message.data.messageText}
+          </Typography>
+        )}
+        {message.data.imageURL && (
+          <MediaContainer>
             <StyledImage
               component="img"
-              src={message.imageURL}
+              src={message.data.imageURL}
               alt="image"
             ></StyledImage>
-          </Box>
+          </MediaContainer>
+        )}
+        {message.data.videoURL && (
+          <MediaContainer>
+            <video
+              autoPlay
+              loop
+              muted
+              src={message.data.videoURL}
+              style={{ maxHeight: "100%", maxWidth: "100%" }}
+            />
+          </MediaContainer>
         )}
       </Box>
     </StyledMessageContainer>
