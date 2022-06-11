@@ -1,5 +1,5 @@
 import Resizer from "react-image-file-resizer";
-import FilePickerAlert from "../../alerts/FilePickerAlert";
+import FilePickerAlert from "../../Alerts/FilePickerAlert";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useContext } from "react";
 import { db } from "../../../firebase";

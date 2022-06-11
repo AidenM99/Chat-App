@@ -1,5 +1,5 @@
-import Chat from "../components/chat/Chat";
-import Sidebar from "../components/sidebar/Sidebar";
+import Chat from "../components/Chat/Chat";
+import Sidebar from "../components/Sidebar/Sidebar";
 import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
-const MemberData = ({ member }) => {
+const MembersListItem = ({ member }) => {
   return (
     <ListItem divider>
       <ListItemAvatar>
@@ -13,4 +13,4 @@ const MemberData = ({ member }) => {
   );
 };
 
-export default MemberData;
+export default MembersListItem;

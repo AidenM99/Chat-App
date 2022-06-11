@@ -1,4 +1,4 @@
-import ChatData from "./ChatData";
+import ChatsListItem from "./ChatsListItem";
 import { db } from "../../../firebase";
 import { useContext } from "react";
 import { List } from "@mui/material";
@@ -53,7 +53,7 @@ const ChatsList = () => {
   return (
     <List sx={{ overflow: "auto", flex: "1" }}>
       {chatsList.map((chatData) => (
-        <ChatData key={chatData.id} chatData={chatData} />
+        <ChatsListItem key={chatData.id} chatData={chatData} />
       ))}
     </List>
   );

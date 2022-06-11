@@ -1,6 +1,6 @@
-import TopPanel from "./topPanel/TopPanel";
-import ChatInput from "./chatInput/ChatInput";
-import ChatContent from "./chatContent/ChatContent";
+import TopPanel from "./TopPanel/TopPanel";
+import ChatInput from "./ChatInput/ChatInput";
+import ChatContent from "./ChatContent/ChatContent";
 import { db } from "../../firebase";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";

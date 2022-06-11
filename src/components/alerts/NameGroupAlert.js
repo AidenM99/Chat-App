@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 
-const GroupChatNameAlert = ({ alertActive, setAlertActive }) => {
+const NameGroupAlert = ({ alertActive, setAlertActive }) => {
   const closeAlert = () => {
     setAlertActive(false);
   };
@@ -20,4 +20,4 @@ const GroupChatNameAlert = ({ alertActive, setAlertActive }) => {
   );
 };
 
-export default GroupChatNameAlert;
+export default NameGroupAlert;

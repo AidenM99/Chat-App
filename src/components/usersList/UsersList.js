@@ -1,4 +1,4 @@
-import UserData from "./UserData";
+import UsersListItem from "./UsersListItem";
 import { db } from "../../firebase";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ const UsersList = ({
       <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
         {usersList.map((userData) =>
           userData.data.uid === user.uid ? null : (
-            <UserData
+            <UsersListItem
               key={userData.id}
               userData={userData}
               userDataClickHandler={userDataClickHandler}

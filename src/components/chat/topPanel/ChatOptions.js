@@ -1,5 +1,5 @@
-import UsersList from "../../usersList/UsersList";
-import Members from "../../members/Members";
+import UsersList from "../../UsersList/UsersList";
+import MembersList from "../../Members/MembersList";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import { useContext } from "react";
@@ -136,7 +136,7 @@ const ChatOptions = ({ chatData }) => {
       </Modal>
       <Modal open={membersModalOpen} onClose={closeMembersModal}>
         <Box>
-          <Members chatData={chatData} />
+          <MembersList chatData={chatData} />
         </Box>
       </Modal>
     </Box>

@@ -1,9 +1,9 @@
-import GroupChatNameAlert from "../alerts/GroupChatNameAlert";
+import NameGroupAlert from "../Alerts/NameGroupAlert";
 import { StyledTextField } from "./styles";
 import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-const NameGroup = ({ addNewGroupChat }) => {
+const NameGroupModal = ({ addNewGroupChat }) => {
   const [alertActive, setAlertActive] = useState(false);
   const [groupName, setGroupName] = useState("");
 
@@ -66,7 +66,7 @@ const NameGroup = ({ addNewGroupChat }) => {
       >
         Create Group
       </Button>
-      <GroupChatNameAlert
+      <NameGroupAlert
         alertActive={alertActive}
         setAlertActive={setAlertActive}
       />
@@ -74,4 +74,4 @@ const NameGroup = ({ addNewGroupChat }) => {
   );
 };
 
-export default NameGroup;
+export default NameGroupModal;

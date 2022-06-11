@@ -1,9 +1,10 @@
 import Masonry from "react-masonry-css";
 import GifBoxIcon from "@mui/icons-material/GifBox";
 import SearchIcon from "@mui/icons-material/Search";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { db } from "../../../firebase";
-import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../utils/UserContext";
+import { useContext, useEffect, useState } from "react";
 import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import {
   Box,
@@ -12,7 +13,6 @@ import {
   Popover,
   TextField,
 } from "@mui/material";
-import SearchOffIcon from "@mui/icons-material/SearchOff";
 
 const SendGif = ({ chatData, updateChat }) => {
   const { user } = useContext(UserContext);

@@ -1,10 +1,10 @@
-import MemberData from "./MemberData";
+import MembersListItem from "./MembersListItem";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import { Box, List, Typography } from "@mui/material";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
-const Members = ({ chatData }) => {
+const MembersList = ({ chatData }) => {
   const [currentMembers, setCurrentMembers] = useState([]);
 
   const getMemberData = async (id) => {
@@ -60,11 +60,11 @@ const Members = ({ chatData }) => {
       </Typography>
       <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
         {currentMembers.map((member) => (
-          <MemberData key={member.id} member={member} />
+          <MembersListItem key={member.id} member={member} />
         ))}
       </List>
     </Box>
   );
 };
 
-export default Members;
+export default MembersList;

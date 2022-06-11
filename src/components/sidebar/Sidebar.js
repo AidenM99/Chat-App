@@ -1,5 +1,5 @@
-import TopPanel from "./topPanel/TopPanel";
-import ChatsList from "./chatsList/ChatsList.js";
+import TopPanel from "./TopPanel/TopPanel";
+import ChatsList from "./ChatsList/ChatsList.js";
 import { Box } from "@mui/material";
 
 const Sidebar = () => {

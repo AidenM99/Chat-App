@@ -1,5 +1,6 @@
+import UsersList from "../../UsersList/UsersList";
 import AddIcon from "@mui/icons-material/Add";
-import UsersList from "../../usersList/UsersList";
+import NameGroup from "../../NameGroup/NameGroup";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
@@ -16,7 +17,6 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import NameGroup from "../../nameGroup/nameGroup";
 
 const CreateChat = () => {
   const { user } = useContext(UserContext);

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const ChatData = ({ chatData }) => {
+const ChatsListItem = ({ chatData }) => {
   const recipientId =
     chatData.data.type === 1 && getOtherPrivateChatMember(chatData);
   const recipientInfo =
@@ -62,4 +62,4 @@ const ChatData = ({ chatData }) => {
   );
 };
 
-export default ChatData;
+export default ChatsListItem;

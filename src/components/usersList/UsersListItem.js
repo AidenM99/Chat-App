@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
-const UserData = ({ userData, userDataClickHandler }) => {
+const UsersListItem = ({ userData, userDataClickHandler }) => {
   const [active, setActive] = useState(false);
 
   const clickHandler = (userData) => {
@@ -30,4 +30,4 @@ const UserData = ({ userData, userDataClickHandler }) => {
   );
 };
 
-export default UserData;
+export default UsersListItem;

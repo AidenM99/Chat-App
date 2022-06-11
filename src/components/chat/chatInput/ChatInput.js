@@ -1,7 +1,7 @@
-import SendMessage from "./SendMessage";
-import SendImage from "./SendImage";
-import SendEmoji from "./SendEmoji";
 import SendGif from "./SendGif";
+import SendEmoji from "./SendEmoji";
+import SendImage from "./SendImage";
+import SendMessage from "./SendMessage";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
