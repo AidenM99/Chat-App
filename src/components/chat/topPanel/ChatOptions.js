@@ -1,5 +1,5 @@
 import UsersList from "../../UsersList/UsersList";
-import MembersList from "../../Members/MembersList";
+import MembersList from "../../MembersList/MembersList";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import { useContext } from "react";
