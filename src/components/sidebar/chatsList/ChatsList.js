@@ -1,8 +1,8 @@
 import ChatsListItem from "./ChatsListItem";
 import { db } from "../../../firebase";
 import { useContext } from "react";
-import { List } from "@mui/material";
 import { useState, useEffect } from "react";
+import { StyledList } from "./ChatsList.styled";
 import { UserContext } from "../../../hooks/UserContext";
 import {
   collection,
@@ -51,11 +51,11 @@ const ChatsList = () => {
   }, []);
 
   return (
-    <List sx={{ overflow: "auto", flex: "1" }}>
+    <StyledList>
       {chatsList.map((chatData) => (
         <ChatsListItem key={chatData.id} chatData={chatData} />
       ))}
-    </List>
+    </StyledList>
   );
 };
 

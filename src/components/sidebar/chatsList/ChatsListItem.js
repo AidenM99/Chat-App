@@ -1,15 +1,11 @@
 import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
-import { Avatar, ListItem, ListItemText } from "@mui/material";
+import { StyledListItemAvatar } from "./ChatsList.styled";
 import {
   getLastChatMessage,
   getOtherPrivateChatMember,
 } from "../../../utils/helpers";
-import {
-  StyledLastMessage,
-  StyledListItemAvatar,
-  StyledRecipientName,
-} from "./ChatsList.styled";
+import { Avatar, ListItem, ListItemText, Typography } from "@mui/material";
 
 const ChatsListItem = ({ chatData }) => {
   const recipientId =
@@ -38,14 +34,26 @@ const ChatsListItem = ({ chatData }) => {
         </StyledListItemAvatar>
         <ListItemText
           primary={
-            <StyledRecipientName noWrap={true}>
+            <Typography
+              fontWeight="500"
+              noWrap={true}
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
               {chatData.data.type === 1
                 ? recipientInfo.displayName
                 : chatData.data.groupName}
-            </StyledRecipientName>
+            </Typography>
           }
           secondary={
-            <StyledLastMessage noWrap={true}>{lastMessage}</StyledLastMessage>
+            <Typography
+              color="lowLight.main"
+              fontSize="0.85rem"
+              width="50%"
+              noWrap={true}
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
+              {lastMessage}
+            </Typography>
           }
           primaryTypographyProps={{ noWrap: true }}
         ></ListItemText>

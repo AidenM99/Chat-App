@@ -99,7 +99,10 @@ const SendImage = ({ chatData, updateChat }) => {
 
   return (
     <>
-      <StyledIconButton onClick={() => fileInput.current.click()}>
+      <StyledIconButton
+        aria-label="image-select"
+        onClick={() => fileInput.current.click()}
+      >
         <StyledImageIcon color="light" />
       </StyledIconButton>
       <SendImageAlert

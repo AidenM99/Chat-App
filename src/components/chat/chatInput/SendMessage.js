@@ -2,7 +2,11 @@ import { StyledIconButton, StyledMessageIcon } from "./ChatInput.styled";
 
 const SendMessage = ({ handleKeyPress }) => {
   return (
-    <StyledIconButton id="sendMessage" onClick={handleKeyPress}>
+    <StyledIconButton
+      aria-label="send-message"
+      id="sendMessage"
+      onClick={handleKeyPress}
+    >
       <StyledMessageIcon color="light" />
     </StyledIconButton>
   );

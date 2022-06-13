@@ -76,7 +76,7 @@ const SendGif = ({ chatData, updateChat }) => {
 
   return (
     <Box>
-      <StyledIconButton onClick={openGiphy}>
+      <StyledIconButton aria-label="gif-select" onClick={openGiphy}>
         <StyledGifIcon color="light" />
       </StyledIconButton>
       <Popover

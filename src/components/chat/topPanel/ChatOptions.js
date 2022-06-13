@@ -99,7 +99,7 @@ const ChatOptions = ({ chatData }) => {
 
   return (
     <Box>
-      <IconButton onClick={openMenu}>
+      <IconButton aria-label="chat-options" onClick={openMenu}>
         <MoreHorizIcon color="light" />
       </IconButton>
       <StyledMenu

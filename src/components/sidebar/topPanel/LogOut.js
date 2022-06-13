@@ -11,7 +11,7 @@ const LogOut = () => {
   return (
     <Link to={"/"} style={{ color: "inherit", textDecoration: "none" }}>
       <Box>
-        <IconButton onClick={googleSignOut}>
+        <IconButton aria-label="logout" onClick={googleSignOut}>
           <LogoutIcon color="light" fontSize="small" />
         </IconButton>
       </Box>

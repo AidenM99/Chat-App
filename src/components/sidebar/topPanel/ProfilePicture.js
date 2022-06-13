@@ -8,7 +8,7 @@ const ProfilePicture = () => {
 
   return (
     <Box>
-      <StyledAvatar src={user.photoURL} salt="profile-picture" />
+      <StyledAvatar alt="profile-picture" src={user.photoURL} />
     </Box>
   );
 };

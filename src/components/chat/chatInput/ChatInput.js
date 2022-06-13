@@ -84,7 +84,6 @@ const ChatInput = ({ chatData }) => {
         maxRows={5}
         multiline
         value={value}
-        textareaStyle={{ padding: "10rem" }}
         onKeyPress={handleKeyPress}
         onChange={handleValueChange}
         inputProps={{

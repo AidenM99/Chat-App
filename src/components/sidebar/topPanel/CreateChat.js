@@ -160,7 +160,7 @@ const CreateChat = () => {
 
   return (
     <Box>
-      <IconButton onClick={openMenu}>
+      <IconButton aria-label="create-chat" onClick={openMenu}>
         <AddIcon color="light" fontSize="small" />
       </IconButton>
       <StyledMenu

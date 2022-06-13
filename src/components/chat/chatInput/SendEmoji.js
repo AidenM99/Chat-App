@@ -1,12 +1,11 @@
 import "emoji-mart/css/emoji-mart.css";
 import { useState } from "react";
 import { Picker } from "emoji-mart";
-import { Box, Popover, useMediaQuery } from "@mui/material";
+import { Box, Popover } from "@mui/material";
 import { StyledEmojiIcon, StyledIconButton } from "./ChatInput.styled";
 
 const SendEmoji = ({ value, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const matches = useMediaQuery("(max-width: 600px)");
 
   const onEmojiClick = (emoji) => {
     setValue(value + emoji.native);
@@ -23,8 +22,9 @@ const SendEmoji = ({ value, setValue }) => {
   return (
     <Box>
       <StyledIconButton
+        aria-label="emoji-select"
         onClick={openEmojiPicker}
-        sx={{ display: matches ? "none" : "inline-flex" }}
+        sx={{ display: { xs: "none", sm: "inline-flex" } }}
       >
         <StyledEmojiIcon></StyledEmojiIcon>
       </StyledIconButton>
