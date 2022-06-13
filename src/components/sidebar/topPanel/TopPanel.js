@@ -1,28 +1,25 @@
 import LogOut from "./LogOut";
 import CreateChat from "./CreateChat";
 import ProfilePicture from "./ProfilePicture";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import {
+  StyledContainer,
+  StyledIconBox,
+  StyledTypography,
+} from "./TopPanel.styled";
 
 const TopPanel = () => {
   return (
-    <Box
-      alignItems="center"
-      borderBottom="1px solid rgba(255, 255, 255, 0.15)"
-      display="flex"
-      justifyContent="space-between"
-      sx={{ p: 1 }}
-    >
+    <StyledContainer>
       <Box display="flex" alignItems="center">
         <ProfilePicture />
-        <Typography fontWeight="500" sx={{ ml: 2 }}>
-          Your Chats
-        </Typography>
+        <StyledTypography>Your Chats</StyledTypography>
       </Box>
-      <Box display="flex">
+      <StyledIconBox>
         <CreateChat />
         <LogOut />
-      </Box>
-    </Box>
+      </StyledIconBox>
+    </StyledContainer>
   );
 };
 

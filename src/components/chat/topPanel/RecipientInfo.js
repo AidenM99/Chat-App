@@ -1,5 +1,6 @@
 import GroupIcon from "@mui/icons-material/Group";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
+import { StyledTypography } from "./TopPanel.styled";
 import { getOtherPrivateChatMember } from "../../../utils/helpers";
 
 const RecipientInfo = ({ chatData }) => {
@@ -21,11 +22,11 @@ const RecipientInfo = ({ chatData }) => {
           <GroupIcon />
         </Avatar>
       )}
-      <Typography fontWeight="500">
+      <StyledTypography noWrap={true}>
         {chatData.data.type === 1
           ? recipientInfo.displayName
           : chatData.data.groupName}
-      </Typography>
+      </StyledTypography>
     </Box>
   );
 };

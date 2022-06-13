@@ -1,8 +1,9 @@
 import MembersListItem from "./MembersListItem";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
-import { Box, List, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { StyledContainer, StyledList } from "./MembersList.styled";
 
 const MembersList = ({ chatData }) => {
   const [currentMembers, setCurrentMembers] = useState([]);
@@ -37,7 +38,7 @@ const MembersList = ({ chatData }) => {
   }, []);
 
   return (
-    <Box
+    <StyledContainer
       backgroundColor="bgSecondary.main"
       border="2px solid rgba(255, 255, 255, 0.15)"
       left="50%"
@@ -58,12 +59,12 @@ const MembersList = ({ chatData }) => {
       >
         Current Members
       </Typography>
-      <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
+      <StyledList dense>
         {currentMembers.map((member) => (
           <MembersListItem key={member.id} member={member} />
         ))}
-      </List>
-    </Box>
+      </StyledList>
+    </StyledContainer>
   );
 };
 

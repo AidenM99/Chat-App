@@ -1,11 +1,10 @@
-import SendIcon from "@mui/icons-material/Send";
-import { IconButton } from "@mui/material";
+import { StyledIconButton, StyledMessageIcon } from "./ChatInput.styled";
 
 const SendMessage = ({ handleKeyPress }) => {
   return (
-    <IconButton id="sendMessage" onClick={handleKeyPress}>
-      <SendIcon color="light"></SendIcon>
-    </IconButton>
+    <StyledIconButton id="sendMessage" onClick={handleKeyPress}>
+      <StyledMessageIcon color="light" />
+    </StyledIconButton>
   );
 };
 

@@ -1,16 +1,15 @@
 import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
+import { Avatar, ListItem, ListItemText } from "@mui/material";
 import {
   getLastChatMessage,
   getOtherPrivateChatMember,
 } from "../../../utils/helpers";
 import {
-  Avatar,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+  StyledLastMessage,
+  StyledListItemAvatar,
+  StyledRecipientName,
+} from "./ChatsList.styled";
 
 const ChatsListItem = ({ chatData }) => {
   const recipientId =
@@ -25,7 +24,7 @@ const ChatsListItem = ({ chatData }) => {
       style={{ color: "inherit", textDecoration: "none" }}
     >
       <ListItem button disablePadding sx={{ p: 1 }}>
-        <ListItemAvatar>
+        <StyledListItemAvatar>
           {chatData.data.type === 1 ? (
             <Avatar
               alt="profile-picture"
@@ -36,24 +35,17 @@ const ChatsListItem = ({ chatData }) => {
               <GroupIcon />
             </Avatar>
           )}
-        </ListItemAvatar>
+        </StyledListItemAvatar>
         <ListItemText
           primary={
-            <Typography fontWeight="500" noWrap={true}>
+            <StyledRecipientName noWrap={true}>
               {chatData.data.type === 1
                 ? recipientInfo.displayName
                 : chatData.data.groupName}
-            </Typography>
+            </StyledRecipientName>
           }
           secondary={
-            <Typography
-              color="lowLight.main"
-              fontSize="0.85rem"
-              noWrap={true}
-              width="50%"
-            >
-              {lastMessage}
-            </Typography>
+            <StyledLastMessage noWrap={true}>{lastMessage}</StyledLastMessage>
           }
           primaryTypographyProps={{ noWrap: true }}
         ></ListItemText>

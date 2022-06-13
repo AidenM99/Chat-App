@@ -1,18 +1,17 @@
 import Masonry from "react-masonry-css";
-import GifBoxIcon from "@mui/icons-material/GifBox";
-import SearchIcon from "@mui/icons-material/Search";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { db } from "../../../firebase";
 import { UserContext } from "../../../hooks/UserContext";
 import { useContext, useEffect, useState } from "react";
+import { Box, InputAdornment, Popover } from "@mui/material";
 import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import {
-  Box,
-  IconButton,
-  InputAdornment,
-  Popover,
-  TextField,
-} from "@mui/material";
+  StyledGifIcon,
+  StyledGifsBox,
+  StyledIconButton,
+  StyledSearchIcon,
+  StyledTextField,
+} from "./ChatInput.styled";
 
 const SendGif = ({ chatData, updateChat }) => {
   const { user } = useContext(UserContext);
@@ -53,6 +52,8 @@ const SendGif = ({ chatData, updateChat }) => {
   };
 
   const saveGifMessage = async (gif) => {
+    closeGiphy();
+
     const chatRef = doc(db, "chats", chatData.id);
 
     const messagesRef = collection(chatRef, "messages");
@@ -75,9 +76,9 @@ const SendGif = ({ chatData, updateChat }) => {
 
   return (
     <Box>
-      <IconButton onClick={openGiphy}>
-        <GifBoxIcon color="light" />
-      </IconButton>
+      <StyledIconButton onClick={openGiphy}>
+        <StyledGifIcon color="light" />
+      </StyledIconButton>
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
@@ -91,16 +92,9 @@ const SendGif = ({ chatData, updateChat }) => {
           horizontal: "right",
         }}
       >
-        <Box
-          bgcolor="bgSecondary.main"
-          height="450px"
-          width="350px"
-          overflow="hidden"
-          display="flex"
-          flexDirection="column"
-        >
-          <Box padding="10px">
-            <TextField
+        <StyledGifsBox>
+          <Box sx={{ p: 1 }}>
+            <StyledTextField
               color="secondary"
               fullWidth
               value={value}
@@ -116,9 +110,9 @@ const SendGif = ({ chatData, updateChat }) => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={searchGifs}>
-                      <SearchIcon color="light" />
-                    </IconButton>
+                    <StyledIconButton onClick={searchGifs}>
+                      <StyledSearchIcon color="light" />
+                    </StyledIconButton>
                   </InputAdornment>
                 ),
               }}
@@ -154,7 +148,7 @@ const SendGif = ({ chatData, updateChat }) => {
               ))}
             </Masonry>
           )}
-        </Box>
+        </StyledGifsBox>
       </Popover>
     </Box>
   );

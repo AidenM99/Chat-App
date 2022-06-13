@@ -2,8 +2,9 @@ import UsersListItem from "./UsersListItem";
 import { db } from "../../firebase";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
+import { Button, Typography } from "@mui/material";
 import { UserContext } from "../../hooks/UserContext";
-import { Box, Button, List, Typography } from "@mui/material";
+import { StyledContainer, StyledList } from "./UsersList.styled";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 const UsersList = ({
@@ -32,19 +33,7 @@ const UsersList = ({
   }, []);
 
   return (
-    <Box
-      backgroundColor="bgSecondary.main"
-      border="2px solid rgba(255, 255, 255, 0.15)"
-      left="50%"
-      position="absolute"
-      top="50%"
-      sx={{
-        py: 3.5,
-        px: 5,
-        boxShadow: 24,
-        transform: "translate(-50%, -50%)",
-      }}
-    >
+    <StyledContainer sx={{ boxShadow: 24 }}>
       <Typography
         id="modal-modal-title"
         variant="h6"
@@ -53,7 +42,7 @@ const UsersList = ({
       >
         {updating ? "Add User" : "Create New Chat"}
       </Typography>
-      <List dense sx={{ height: "200px", overflow: "auto", width: "275px" }}>
+      <StyledList dense>
         {usersList.map((userData) =>
           userData.data.uid === user.uid ? null : (
             <UsersListItem
@@ -63,7 +52,7 @@ const UsersList = ({
             />
           )
         )}
-      </List>
+      </StyledList>
       {chatType === 2 ? (
         <Button
           variant="contained"
@@ -75,7 +64,7 @@ const UsersList = ({
           Confirm
         </Button>
       ) : null}
-    </Box>
+    </StyledContainer>
   );
 };
 

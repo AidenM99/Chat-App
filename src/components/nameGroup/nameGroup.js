@@ -1,6 +1,6 @@
 import NameGroupAlert from "./NameGroupAlert";
-import { StyledTextField } from "./NameGroup.styled";
 import { useEffect, useState } from "react";
+import { StyledTextField } from "./NameGroup.styled";
 import { Box, Button, Typography } from "@mui/material";
 
 const NameGroupModal = ({ addNewGroupChat }) => {

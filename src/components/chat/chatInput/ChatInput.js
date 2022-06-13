@@ -5,10 +5,10 @@ import SendMessage from "./SendMessage";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
-import { StyledTextField } from "./ChatInput.styled";
+import { InputAdornment } from "@mui/material";
 import { UserContext } from "../../../hooks/UserContext";
-import { Box, InputAdornment } from "@mui/material";
 import { getOtherPrivateChatMember } from "../../../utils/helpers";
+import { StyledContainer, StyledTextArea } from "./ChatInput.styled";
 import {
   addDoc,
   collection,
@@ -77,13 +77,14 @@ const ChatInput = ({ chatData }) => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <StyledTextField
+    <StyledContainer>
+      <StyledTextArea
         color="secondary"
         fullWidth
         maxRows={5}
         multiline
         value={value}
+        textareaStyle={{ padding: "10rem" }}
         onKeyPress={handleKeyPress}
         onChange={handleValueChange}
         inputProps={{
@@ -104,8 +105,8 @@ const ChatInput = ({ chatData }) => {
             </InputAdornment>
           ),
         }}
-      ></StyledTextField>
-    </Box>
+      ></StyledTextArea>
+    </StyledContainer>
   );
 };
 

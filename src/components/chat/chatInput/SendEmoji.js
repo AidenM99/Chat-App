@@ -1,12 +1,12 @@
 import "emoji-mart/css/emoji-mart.css";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { useState } from "react";
 import { Picker } from "emoji-mart";
-import { Popover } from "@mui/material";
-import { Box, IconButton } from "@mui/material";
+import { Box, Popover, useMediaQuery } from "@mui/material";
+import { StyledEmojiIcon, StyledIconButton } from "./ChatInput.styled";
 
 const SendEmoji = ({ value, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const matches = useMediaQuery("(max-width: 600px)");
 
   const onEmojiClick = (emoji) => {
     setValue(value + emoji.native);
@@ -22,9 +22,12 @@ const SendEmoji = ({ value, setValue }) => {
 
   return (
     <Box>
-      <IconButton onClick={openEmojiPicker}>
-        <EmojiEmotionsIcon color="light"></EmojiEmotionsIcon>
-      </IconButton>
+      <StyledIconButton
+        onClick={openEmojiPicker}
+        sx={{ display: matches ? "none" : "inline-flex" }}
+      >
+        <StyledEmojiIcon></StyledEmojiIcon>
+      </StyledIconButton>
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
