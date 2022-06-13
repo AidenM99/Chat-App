@@ -26,7 +26,7 @@ const SignIn = () => {
     saveUserData(data);
   };
 
-  const joinTestChat = async (data) => {
+  const subscribeToTestChat = async (data) => {
     await updateDoc(doc(db, "chats", "nuLxbdrIHykd1gX0w1FI"), {
       members: arrayUnion(data.user.uid),
     });
@@ -40,7 +40,7 @@ const SignIn = () => {
       photoURL: data.user.photoURL,
     });
 
-    joinTestChat(data);
+    subscribeToTestChat(data);
   };
 
   return (
