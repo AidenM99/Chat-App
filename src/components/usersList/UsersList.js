@@ -2,7 +2,7 @@ import UsersListItem from "./UsersListItem";
 import { db } from "../../firebase";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
-import { UserContext } from "../../utils/UserContext";
+import { UserContext } from "../../hooks/UserContext";
 import { Box, Button, List, Typography } from "@mui/material";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 

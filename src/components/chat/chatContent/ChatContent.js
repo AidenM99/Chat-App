@@ -1,7 +1,7 @@
 import Message from "./Message";
 import { db } from "../../../firebase";
 import { useEffect, useState } from "react";
-import { StyledChatContent } from "./styles";
+import { StyledChatContent } from "./ChatContent.styled";
 import {
   collection,
   limit,

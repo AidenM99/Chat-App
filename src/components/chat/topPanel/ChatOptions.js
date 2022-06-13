@@ -4,9 +4,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
-import { StyledMenu } from "./styles";
+import { StyledMenu } from "./TopPanel.styled";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../../utils/UserContext";
+import { UserContext } from "../../../hooks/UserContext";
 import { Box, IconButton, MenuItem, Modal } from "@mui/material";
 import {
   doc,
@@ -34,8 +34,6 @@ const ChatOptions = ({ chatData }) => {
   const openUsersModal = () => {
     setUsersModalOpen(true);
 
-    closeMenu();
-
     setSelectedUsers([]);
   };
 
@@ -47,8 +45,6 @@ const ChatOptions = ({ chatData }) => {
 
   const openMembersModal = () => {
     setMembersModalOpen(true);
-
-    closeMenu();
   };
 
   const closeMembersModal = () => {
@@ -76,6 +72,7 @@ const ChatOptions = ({ chatData }) => {
     const chatSnap = await getDoc(chatRef);
 
     const currentMembers = chatSnap.data().members;
+
     const isCurrentMember = currentMembers.find(
       (user) => user === userData.data.uid
     );
@@ -109,6 +106,7 @@ const ChatOptions = ({ chatData }) => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={closeMenu}
+        onClick={closeMenu}
       >
         {chatData.data.type === 1 ? (
           <MenuItem onClick={hideChat} component={Link} to={"/"}>

@@ -1,11 +1,11 @@
 import Resizer from "react-image-file-resizer";
-import FilePickerAlert from "../../Alerts/FilePickerAlert";
+import SendImageAlert from "./SendImageAlert";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useContext } from "react";
 import { db } from "../../../firebase";
 import { useRef, useState } from "react";
 import { IconButton } from "@mui/material";
-import { UserContext } from "../../../utils/UserContext";
+import { UserContext } from "../../../hooks/UserContext";
 import {
   getStorage,
   ref,
@@ -103,7 +103,7 @@ const SendImage = ({ chatData, updateChat }) => {
       <IconButton onClick={() => fileInput.current.click()}>
         <AddCircleIcon color="light"></AddCircleIcon>
       </IconButton>
-      <FilePickerAlert
+      <SendImageAlert
         alertActive={alertActive}
         setAlertActive={setAlertActive}
       />

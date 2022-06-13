@@ -1,6 +1,6 @@
 import GroupIcon from "@mui/icons-material/Group";
 import { Avatar, Box, Typography } from "@mui/material";
-import { getOtherPrivateChatMember } from "../../../utils/utils";
+import { getOtherPrivateChatMember } from "../../../utils/helpers";
 
 const RecipientInfo = ({ chatData }) => {
   const recipientId =

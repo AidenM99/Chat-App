@@ -3,7 +3,7 @@ import GifBoxIcon from "@mui/icons-material/GifBox";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { db } from "../../../firebase";
-import { UserContext } from "../../../utils/UserContext";
+import { UserContext } from "../../../hooks/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import {

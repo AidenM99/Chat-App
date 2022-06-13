@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   getLastChatMessage,
   getOtherPrivateChatMember,
-} from "../../../utils/utils";
+} from "../../../utils/helpers";
 import {
   Avatar,
   ListItem,

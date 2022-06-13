@@ -5,10 +5,10 @@ import SendMessage from "./SendMessage";
 import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
-import { StyledTextField } from "./styles";
-import { UserContext } from "../../../utils/UserContext";
+import { StyledTextField } from "./ChatInput.styled";
+import { UserContext } from "../../../hooks/UserContext";
 import { Box, InputAdornment } from "@mui/material";
-import { getOtherPrivateChatMember } from "../../../utils/utils";
+import { getOtherPrivateChatMember } from "../../../utils/helpers";
 import {
   addDoc,
   collection,

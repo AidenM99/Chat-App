@@ -1,5 +1,9 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { StyledMessageContainer, StyledImage, MediaContainer } from "./styles";
+import {
+  StyledMessageContainer,
+  StyledImage,
+  MediaContainer,
+} from "./ChatContent.styled";
 
 const Message = ({ message }) => {
   return (

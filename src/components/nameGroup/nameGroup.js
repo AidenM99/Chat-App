@@ -1,5 +1,5 @@
-import NameGroupAlert from "../Alerts/NameGroupAlert";
-import { StyledTextField } from "./styles";
+import NameGroupAlert from "./NameGroupAlert";
+import { StyledTextField } from "./NameGroup.styled";
 import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 

@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 
-const FilePickerAlert = ({ alertActive, setAlertActive }) => {
+const SendImageAlert = ({ alertActive, setAlertActive }) => {
   const closeAlert = () => {
     setAlertActive(false);
   };
@@ -20,4 +20,4 @@ const FilePickerAlert = ({ alertActive, setAlertActive }) => {
   );
 };
 
-export default FilePickerAlert;
+export default SendImageAlert;
