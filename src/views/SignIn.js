@@ -2,7 +2,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { db, provider } from "../firebase";
 import { Box, Button } from "@mui/material";
 import { getAuth, signInWithPopup } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const SignIn = () => {
   const googleSignIn = async () => {
@@ -26,6 +26,12 @@ const SignIn = () => {
     saveUserData(data);
   };
 
+  const joinTestChat = async (data) => {
+    await updateDoc(doc(db, "chats", "nuLxbdrIHykd1gX0w1FI"), {
+      members: arrayUnion(data.user.uid),
+    });
+  };
+
   const saveUserData = async (data) => {
     await setDoc(doc(db, "users", data.user.uid), {
       uid: data.user.uid,
@@ -33,6 +39,8 @@ const SignIn = () => {
       email: data.user.email,
       photoURL: data.user.photoURL,
     });
+
+    joinTestChat(data);
   };
 
   return (
