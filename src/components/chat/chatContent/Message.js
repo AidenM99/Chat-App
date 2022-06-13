@@ -36,6 +36,7 @@ const Message = ({ message }) => {
               autoPlay
               loop
               muted
+              playsInline
               src={message.data.videoURL}
               style={{ maxHeight: "100%", maxWidth: "100%" }}
             />
