@@ -15,9 +15,9 @@ const Message = ({ message }) => {
         ></Avatar>
       </Box>
       <Box display="flex" flexDirection="column" width="95%" sx={{ mt: -0.35 }}>
-        <Typography fontWeight="500">{message.data.sentBy}</Typography>
+        <Typography>{message.data.sentBy}</Typography>
         {message.data.messageText && (
-          <Typography color="lowLight.main">
+          <Typography color="textSecondary.main">
             {message.data.messageText}
           </Typography>
         )}

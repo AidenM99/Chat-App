@@ -2,7 +2,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 const MembersListItem = ({ member }) => {
   return (
-    <ListItem divider>
+    <ListItem>
       <ListItemAvatar>
         <Avatar alt="profile-picture" src={member.data.photoURL}></Avatar>
       </ListItemAvatar>

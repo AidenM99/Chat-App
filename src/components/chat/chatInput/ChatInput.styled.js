@@ -14,7 +14,7 @@ export const StyledContainer = styled(Box)(({ theme }) => ({
 
 export const StyledTextArea = styled(TextField)(({ theme }) => ({
   textarea: {
-    color: theme.palette.light.main,
+    color: theme.palette.primary.main,
   },
   [theme.breakpoints.down("md")]: {
     "& .MuiInputBase-multiline": {
@@ -24,7 +24,7 @@ export const StyledTextArea = styled(TextField)(({ theme }) => ({
 }));
 
 export const StyledEmojiIcon = styled(EmojiEmotionsIcon)(({ theme }) => ({
-  color: theme.palette.light.main,
+  color: theme.palette.primary.main,
   fontSize: "1.5rem",
   [theme.breakpoints.down("md")]: {
     fontSize: "1.25rem",
@@ -32,7 +32,7 @@ export const StyledEmojiIcon = styled(EmojiEmotionsIcon)(({ theme }) => ({
 }));
 
 export const StyledGifIcon = styled(GifBoxIcon)(({ theme }) => ({
-  color: theme.palette.light.main,
+  color: theme.palette.primary.main,
   fontSize: "1.5rem",
   [theme.breakpoints.down("md")]: {
     fontSize: "1.25rem",
@@ -40,7 +40,7 @@ export const StyledGifIcon = styled(GifBoxIcon)(({ theme }) => ({
 }));
 
 export const StyledImageIcon = styled(AddCircleIcon)(({ theme }) => ({
-  color: theme.palette.light.main,
+  color: theme.palette.primary.main,
   fontSize: "1.5rem",
   [theme.breakpoints.down("md")]: {
     fontSize: "1.25rem",
@@ -48,7 +48,7 @@ export const StyledImageIcon = styled(AddCircleIcon)(({ theme }) => ({
 }));
 
 export const StyledMessageIcon = styled(SendIcon)(({ theme }) => ({
-  color: theme.palette.light.main,
+  color: theme.palette.primary.main,
   fontSize: "1.5rem",
   [theme.breakpoints.down("md")]: {
     fontSize: "1.25rem",
@@ -86,7 +86,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 export const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
-  color: theme.palette.light.main,
+  color: theme.palette.primary.main,
   fontSize: "1.5rem",
   [theme.breakpoints.down("md")]: {
     fontSize: "1.25rem",

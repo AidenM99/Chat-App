@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box } from "@mui/material";
 import { StyledAvatar } from "./TopPanel.styled";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 
 const ProfilePicture = () => {
   const { user } = useContext(UserContext);

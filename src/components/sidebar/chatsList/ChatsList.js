@@ -3,7 +3,7 @@ import { db } from "../../../firebase";
 import { useContext } from "react";
 import { useState, useEffect } from "react";
 import { StyledList } from "./ChatsList.styled";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import {
   collection,
   query,

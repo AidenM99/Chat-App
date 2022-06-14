@@ -3,7 +3,7 @@ import { db } from "../../firebase";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
-import { UserContext } from "../../hooks/UserContext";
+import { UserContext } from "../../hooks/Context";
 import { StyledContainer, StyledList } from "./UsersList.styled";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 

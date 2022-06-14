@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 
 export const StyledContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.bgSecondary.main,
-  borderRight: "1px solid rgba(255, 255, 255, 0.15)",
+  borderRight: "1px solid " + theme.palette.divider.main,
   display: "flex",
   flexDirection: "column",
   height: "100vh",

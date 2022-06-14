@@ -28,7 +28,7 @@ const ChatsListItem = ({ chatData }) => {
             ></Avatar>
           ) : (
             <Avatar alt="group-icon" sx={{ bgcolor: "groupChat.main" }}>
-              <GroupIcon />
+              <GroupIcon sx={{ color: "white" }} />
             </Avatar>
           )}
         </StyledListItemAvatar>
@@ -46,7 +46,7 @@ const ChatsListItem = ({ chatData }) => {
           }
           secondary={
             <Typography
-              color="lowLight.main"
+              color="textSecondary.main"
               fontSize="0.85rem"
               width="50%"
               noWrap={true}

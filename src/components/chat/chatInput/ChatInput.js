@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
 import { InputAdornment } from "@mui/material";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import { getOtherPrivateChatMember } from "../../../utils/helpers";
 import { StyledContainer, StyledTextArea } from "./ChatInput.styled";
 import {

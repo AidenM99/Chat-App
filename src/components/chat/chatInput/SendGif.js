@@ -1,7 +1,7 @@
 import Masonry from "react-masonry-css";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { db } from "../../../firebase";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import { useContext, useEffect, useState } from "react";
 import { Box, InputAdornment, Popover } from "@mui/material";
 import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";

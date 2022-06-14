@@ -18,7 +18,10 @@ const RecipientInfo = ({ chatData }) => {
           sx={{ mr: 2 }}
         />
       ) : (
-        <Avatar alt="group-icon" sx={{ bgcolor: "groupChat.main", mr: 2 }}>
+        <Avatar
+          alt="group-icon"
+          sx={{ color: "#fff", bgcolor: "groupChat.main", mr: 2 }}
+        >
           <GroupIcon />
         </Avatar>
       )}

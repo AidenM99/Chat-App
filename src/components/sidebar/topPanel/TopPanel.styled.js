@@ -17,7 +17,7 @@ export const StyledTypography = styled(Typography)(({ theme }) => ({
 
 export const StyledContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
-  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+  borderBottom: "1px solid " + theme.palette.divider.main,
   display: "flex",
   justifyContent: "space-between",
   padding: "0.5rem",

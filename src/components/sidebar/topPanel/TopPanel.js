@@ -1,5 +1,6 @@
 import LogOut from "./LogOut";
 import CreateChat from "./CreateChat";
+import SwitchTheme from "./SwitchTheme";
 import ProfilePicture from "./ProfilePicture";
 import { Box } from "@mui/material";
 import {
@@ -16,6 +17,7 @@ const TopPanel = () => {
         <StyledTypography>Your Chats</StyledTypography>
       </Box>
       <StyledIconBox>
+        <SwitchTheme />
         <CreateChat />
         <LogOut />
       </StyledIconBox>

@@ -3,7 +3,7 @@ import { Box, List } from "@mui/material";
 
 export const StyledContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.bgSecondary.main,
-  border: "2px solid rgba(255, 255, 255, 0.15)",
+  border: "2px solid " + theme.palette.divider.main,
   left: "50%",
   padding: "1.75rem 2.5rem",
   position: "absolute",

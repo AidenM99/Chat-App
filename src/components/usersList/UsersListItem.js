@@ -13,7 +13,6 @@ const UsersListItem = ({ userData, userDataClickHandler }) => {
   return (
     <ListItem
       button
-      divider
       onClick={() => clickHandler(userData)}
       sx={{
         bgcolor: active && "secondary.main",

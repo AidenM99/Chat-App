@@ -12,7 +12,7 @@ const LogOut = () => {
     <Link to={"/"} style={{ color: "inherit", textDecoration: "none" }}>
       <Box>
         <IconButton aria-label="logout" onClick={googleSignOut}>
-          <LogoutIcon color="light" fontSize="small" />
+          <LogoutIcon color="primary" fontSize="small" />
         </IconButton>
       </Box>
     </Link>

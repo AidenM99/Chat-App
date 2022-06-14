@@ -3,7 +3,7 @@ import SendImageAlert from "./SendImageAlert";
 import { useContext } from "react";
 import { db } from "../../../firebase";
 import { useRef, useState } from "react";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import { StyledIconButton, StyledImageIcon } from "./ChatInput.styled";
 import {
   getStorage,

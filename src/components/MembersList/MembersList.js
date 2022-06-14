@@ -38,19 +38,7 @@ const MembersList = ({ chatData }) => {
   }, []);
 
   return (
-    <StyledContainer
-      backgroundColor="bgSecondary.main"
-      border="2px solid rgba(255, 255, 255, 0.15)"
-      left="50%"
-      position="absolute"
-      top="50%"
-      sx={{
-        py: 3.5,
-        px: 5,
-        boxShadow: 24,
-        transform: "translate(-50%, -50%)",
-      }}
-    >
+    <StyledContainer sx={{ boxShadow: 24 }}>
       <Typography
         id="modal-modal-title"
         variant="h6"

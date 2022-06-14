@@ -15,3 +15,7 @@ export const getLastChatMessage = (chatData) => {
     return "Chat Created";
   }
 };
+
+export const getThemePref = () => {
+  return localStorage.getItem("theme");
+};

@@ -27,7 +27,7 @@ const SignIn = () => {
   };
 
   const subscribeToTestChat = async (data) => {
-    await updateDoc(doc(db, "chats", "nuLxbdrIHykd1gX0w1FI"), {
+    await updateDoc(doc(db, "chats", "xR86zgd95w4BJapy7klu"), {
       members: arrayUnion(data.user.uid),
     });
   };
@@ -54,7 +54,7 @@ const SignIn = () => {
     >
       <Box
         alignItems="center"
-        backgroundColor="primary.main"
+        backgroundColor="bgSecondary.main"
         display="flex"
         flexDirection="column"
         padding="3rem"
@@ -67,7 +67,7 @@ const SignIn = () => {
           mb="3rem"
           padding="0.75rem"
         >
-          <ChatBubbleOutlineIcon color="light" sx={{ fontSize: 100 }} />
+          <ChatBubbleOutlineIcon sx={{ color: "#fff", fontSize: 100 }} />
         </Box>
         <Button
           variant="contained"

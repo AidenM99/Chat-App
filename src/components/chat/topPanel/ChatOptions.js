@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
 import { StyledMenu } from "./TopPanel.styled";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import { Box, IconButton, MenuItem, Modal } from "@mui/material";
 import {
   doc,
@@ -100,7 +100,7 @@ const ChatOptions = ({ chatData }) => {
   return (
     <Box>
       <IconButton aria-label="chat-options" onClick={openMenu}>
-        <MoreHorizIcon color="light" />
+        <MoreHorizIcon color="primary" />
       </IconButton>
       <StyledMenu
         anchorEl={anchorEl}

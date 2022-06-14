@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { db } from "../../../firebase";
 import { StyledMenu } from "./TopPanel.styled";
-import { UserContext } from "../../../hooks/UserContext";
+import { UserContext } from "../../../hooks/Context";
 import { Box, IconButton, MenuItem, Modal } from "@mui/material";
 import {
   addDoc,
@@ -161,7 +161,7 @@ const CreateChat = () => {
   return (
     <Box>
       <IconButton aria-label="create-chat" onClick={openMenu}>
-        <AddIcon color="light" fontSize="small" />
+        <AddIcon color="primary" fontSize="small" />
       </IconButton>
       <StyledMenu
         anchorEl={anchorEl}
