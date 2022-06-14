@@ -1,6 +1,6 @@
 import Message from "./Message";
 import { db } from "../../../firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyledChatContent } from "./ChatContent.styled";
 import {
   collection,
@@ -9,9 +9,11 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
+import { Box } from "@mui/material";
 
 const ChatContent = ({ chatData }) => {
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const unsubscribeMessages = subscribeMessages();
@@ -22,6 +24,10 @@ const ChatContent = ({ chatData }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatData.id]);
+
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
 
   const subscribeMessages = () => {
     const recentMessagesQuery = query(
@@ -41,6 +47,7 @@ const ChatContent = ({ chatData }) => {
 
   return (
     <StyledChatContent>
+      <Box ref={messagesEndRef} />
       {messages.map((message) => (
         <Message key={message.id} message={message} />
       ))}
