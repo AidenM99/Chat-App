@@ -6,6 +6,7 @@ import { getOtherPrivateChatMember } from "../../../utils/helpers";
 const RecipientInfo = ({ chatData }) => {
   const recipientId =
     chatData.data.type === 1 && getOtherPrivateChatMember(chatData);
+
   const recipientInfo =
     chatData.data.type === 1 && chatData.data.memberInfo[recipientId];
 
