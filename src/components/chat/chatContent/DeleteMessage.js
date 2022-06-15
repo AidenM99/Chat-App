@@ -1,6 +1,7 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import { db } from "../../../firebase";
 import { IconButton } from "@mui/material";
+import { StyledDeleteBox } from "./ChatContent.styled";
 import {
   collection,
   deleteDoc,
@@ -8,17 +9,14 @@ import {
   getDocs,
   orderBy,
   query,
-  serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { StyledDeleteBox } from "./ChatContent.styled";
 
 const DeleteMessage = ({ message, chatData }) => {
   const updateLastMessage = async (lastMessage) => {
     const chatRef = doc(db, "chats", chatData.id);
 
     await updateDoc(chatRef, {
-      lastActive: serverTimestamp(),
       lastMessage: lastMessage,
     });
   };
@@ -59,7 +57,7 @@ const DeleteMessage = ({ message, chatData }) => {
   return (
     <StyledDeleteBox className="delete-icon">
       <IconButton onClick={() => deleteMessage(message)}>
-        <ClearIcon fontSize="small" />
+        <ClearIcon color="primary" fontSize="small" />
       </IconButton>
     </StyledDeleteBox>
   );
