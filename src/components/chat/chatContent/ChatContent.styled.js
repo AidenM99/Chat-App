@@ -5,7 +5,6 @@ export const StyledChatContent = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column-reverse",
   flex: "1",
-  overflowWrap: "anywhere",
   overflowX: "hidden",
   overflowY: "auto",
 }));
@@ -13,6 +12,8 @@ export const StyledChatContent = styled(Box)(({ theme }) => ({
 export const StyledMessageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   whiteSpace: "pre-line",
+  wordBreak: "break-word",
+  overflowWrap: "anywhere",
   "&:hover": {
     backgroundColor: theme.palette.bgSecondary.main,
   },
