@@ -19,6 +19,10 @@ const lightPalette = {
   golden: "#fbbb04",
 };
 
+const getThemePref = () => {
+  return localStorage.getItem("theme");
+};
+
 const getDesignTokens = (mode) => ({
   components: {
     MuiCssBaseline: {
@@ -102,4 +106,4 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-export default getDesignTokens;
+export { getThemePref, getDesignTokens };

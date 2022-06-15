@@ -1,13 +1,12 @@
 import SignIn from "./views/SignIn";
 import Loading from "./views/Loading";
 import Dashboard from "./views/Dashboard";
-import getDesignTokens from "./theme/theme";
 import { getAuth } from "firebase/auth";
 import { useMemo, useState } from "react";
 import { CssBaseline } from "@mui/material";
-import { getThemePref } from "./utils/helpers";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router } from "react-router-dom";
+import { getDesignTokens, getThemePref } from "./theme/theme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserContext, ColorModeContext } from "./hooks/Context";
 

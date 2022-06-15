@@ -1,18 +1,19 @@
 import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
 import { StyledListItemAvatar } from "./ChatsList.styled";
-import {
-  getLastChatMessage,
-  getOtherPrivateChatMember,
-} from "../../../utils/helpers";
+import { getOtherPrivateChatMember } from "../../../utils/helpers";
 import { Avatar, ListItem, ListItemText, Typography } from "@mui/material";
 
 const ChatsListItem = ({ chatData }) => {
   const recipientId =
     chatData.data.type === 1 && getOtherPrivateChatMember(chatData);
+
   const recipientInfo =
     chatData.data.type === 1 && chatData.data.memberInfo[recipientId];
-  const lastMessage = getLastChatMessage(chatData);
+
+  const lastMessage = chatData.data.lastMessage
+    ? chatData.data.lastMessage
+    : "Chat Created";
 
   return (
     <Link
