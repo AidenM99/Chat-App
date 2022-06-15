@@ -1,11 +1,16 @@
+import { useContext } from "react";
+import { UserContext } from "../../../hooks/Context";
 import { Avatar, Box, Typography } from "@mui/material";
 import {
   StyledMessageContainer,
   StyledImage,
   MediaContainer,
 } from "./ChatContent.styled";
+import DeleteMessage from "./DeleteMessage";
 
-const Message = ({ message }) => {
+const Message = ({ message, chatData }) => {
+  const { user } = useContext(UserContext);
+
   return (
     <StyledMessageContainer sx={{ p: 2 }}>
       <Box sx={{ mr: 2 }}>
@@ -41,6 +46,9 @@ const Message = ({ message }) => {
               style={{ maxHeight: "100%", maxWidth: "100%" }}
             />
           </MediaContainer>
+        )}
+        {message.data.sentBy === user.displayName && (
+          <DeleteMessage message={message} chatData={chatData} />
         )}
       </Box>
     </StyledMessageContainer>

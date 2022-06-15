@@ -49,7 +49,7 @@ const ChatContent = ({ chatData }) => {
     <StyledChatContent>
       <Box ref={messagesEndRef} />
       {messages.map((message) => (
-        <Message key={message.id} message={message} />
+        <Message key={message.id} message={message} chatData={chatData} />
       ))}
     </StyledChatContent>
   );

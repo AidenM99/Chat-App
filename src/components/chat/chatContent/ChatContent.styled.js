@@ -12,10 +12,14 @@ export const StyledChatContent = styled(Box)(({ theme }) => ({
 export const StyledMessageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   whiteSpace: "pre-line",
+  position: "relative",
   wordBreak: "break-word",
   overflowWrap: "anywhere",
   "&:hover": {
     backgroundColor: theme.palette.bgSecondary.main,
+  },
+  "&:hover .delete-icon, &active .delete-icon": {
+    display: "inline-block",
   },
 }));
 
@@ -29,4 +33,11 @@ export const StyledImage = styled(Box)(() => ({
 export const MediaContainer = styled(Box)(() => ({
   maxHeight: "350px",
   maxWidth: "350px",
+}));
+
+export const StyledDeleteBox = styled(Box)(() => ({
+  display: "none",
+  position: "absolute",
+  right: "5px",
+  top: "5px",
 }));
