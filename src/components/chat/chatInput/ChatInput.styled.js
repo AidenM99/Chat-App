@@ -5,13 +5,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { TextField, styled, IconButton, Box } from "@mui/material";
 
-export const StyledContainer = styled(Box)(({ theme }) => ({
-  padding: "1.5rem",
-  [theme.breakpoints.down("md")]: {
-    padding: "0.75rem",
-  },
-}));
-
 export const StyledTextArea = styled(TextField)(({ theme }) => ({
   textarea: {
     color: theme.palette.primary.main,
@@ -64,11 +57,14 @@ export const StyledIconButton = styled(IconButton)(({ theme }) => ({
 
 export const StyledGifsBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.bgSecondary.main,
-  height: "450px",
-  width: "316px",
+  height: "426px",
+  width: "406px",
   overflow: "hidden",
   display: "flex",
   flexDirection: "column",
+  [theme.breakpoints.down("sm")]: {
+    width: "316px",
+  },
   "@media (max-width: 350px)": {
     width: "100%",
   },
