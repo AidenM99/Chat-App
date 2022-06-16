@@ -2,12 +2,15 @@ import "emoji-mart/css/emoji-mart.css";
 import { useState } from "react";
 import { Picker } from "emoji-mart";
 import { Box, Popover } from "@mui/material";
+import { getThemePref } from "../../../theme/theme";
 import { StyledEmojiIcon, StyledIconButton } from "./ChatInput.styled";
 
 const SendEmoji = ({ value, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const onEmojiClick = (emoji) => {
+    closeEmojiPicker();
+
     setValue(value + emoji.native);
   };
 
@@ -43,10 +46,10 @@ const SendEmoji = ({ value, setValue }) => {
       >
         <Picker
           onSelect={onEmojiClick}
-          theme="dark"
+          theme={getThemePref()}
           set="twitter"
           color="#5865F2"
-          emojiSize={20}
+          emojiSize={30}
         />
       </Popover>
     </Box>
