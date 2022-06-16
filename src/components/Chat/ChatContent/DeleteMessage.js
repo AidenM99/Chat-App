@@ -56,7 +56,10 @@ const DeleteMessage = ({ message, chatData }) => {
 
   return (
     <StyledDeleteBox className="delete-icon">
-      <IconButton onClick={() => deleteMessage(message)}>
+      <IconButton
+        aria-label="delete-message"
+        onClick={() => deleteMessage(message)}
+      >
         <ClearIcon color="primary" fontSize="small" />
       </IconButton>
     </StyledDeleteBox>
