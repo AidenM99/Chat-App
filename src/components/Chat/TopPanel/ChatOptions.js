@@ -14,6 +14,7 @@ import {
   arrayRemove,
   getDoc,
   arrayUnion,
+  deleteDoc,
 } from "firebase/firestore";
 
 const ChatOptions = ({ chatData }) => {
@@ -61,10 +62,16 @@ const ChatOptions = ({ chatData }) => {
 
   const leaveGroup = async () => {
     const chatRef = doc(db, "chats", chatData.id);
+    const chatSnap = await getDoc(chatRef);
+    const chatMembers = chatSnap.data().members;
 
-    await updateDoc(chatRef, {
-      members: arrayRemove(user.uid),
-    });
+    if (chatMembers.length === 1) {
+      deleteDoc(chatRef);
+    } else {
+      await updateDoc(chatRef, {
+        members: arrayRemove(user.uid),
+      });
+    }
   };
 
   const userDataClickHandler = async (userData) => {
