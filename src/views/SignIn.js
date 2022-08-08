@@ -1,7 +1,7 @@
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { db, provider } from "../firebase";
 import { Box, Button } from "@mui/material";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithPopup, signInAnonymously } from "firebase/auth";
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const SignIn = () => {
@@ -10,6 +10,18 @@ const SignIn = () => {
       const auth = getAuth();
 
       const data = await signInWithPopup(auth, provider);
+
+      isExistingUser(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const anonymousSignIn = async () => {
+    try {
+      const auth = getAuth();
+
+      const data = await signInAnonymously(auth);
 
       isExistingUser(data);
     } catch (err) {
@@ -76,6 +88,15 @@ const SignIn = () => {
           onClick={() => googleSignIn()}
         >
           Sign in with Google
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          fullWidth
+          onClick={() => anonymousSignIn()}
+          sx={{ mt: 2 }}
+        >
+          Sign in as a guest
         </Button>
       </Box>
     </Box>

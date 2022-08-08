@@ -40,6 +40,11 @@ function App() {
     );
   }
   if (user) {
+    if (user.isAnonymous === true) {
+      const guestIdentifier = Math.floor(1000 + Math.random() * 9000);
+
+      user.displayName = `Guest User#${guestIdentifier}`;
+    }
     return (
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
