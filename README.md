@@ -2,6 +2,8 @@
 A chat application with CRUD functionalities where users can chat in real‑time.
 
 - Live Demo: https://chat-app-4cf40.web.app/
+ 
+https://user-images.githubusercontent.com/79367227/174269225-79588b79-95e0-420e-8e4c-153ec6c46b58.mp4
 
 ## Technologies Used
 This project was built using:
