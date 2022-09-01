@@ -26,7 +26,9 @@ const Message = ({ message, chatData }) => {
         <Typography>{message.data.sentBy}</Typography>
 
         {loaded ? null : (
-          <Skeleton variant="rectangular" height="350px" width="350px" />
+          <MediaContainer>
+            <Skeleton variant="rectangular" height="200px" width="100%" />
+          </MediaContainer>
         )}
 
         {message.data.messageText && (
