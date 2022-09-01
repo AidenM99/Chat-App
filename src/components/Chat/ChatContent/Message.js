@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../hooks/Context";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Skeleton, Typography } from "@mui/material";
 import {
   StyledMessageContainer,
   StyledImage,
@@ -10,6 +10,9 @@ import DeleteMessage from "./DeleteMessage";
 
 const Message = ({ message, chatData }) => {
   const { user } = useContext(UserContext);
+  const [loaded, setLoaded] = useState(
+    message.data.imageURL || message.data.videoURL ? false : true
+  );
 
   return (
     <StyledMessageContainer sx={{ p: 2 }}>
@@ -21,20 +24,28 @@ const Message = ({ message, chatData }) => {
       </Box>
       <Box display="flex" flexDirection="column" width="95%" sx={{ mt: -0.35 }}>
         <Typography>{message.data.sentBy}</Typography>
+
+        {loaded ? null : (
+          <Skeleton variant="rectangular" height="350px" width="350px" />
+        )}
+
         {message.data.messageText && (
           <Typography color="textSecondary.main">
             {message.data.messageText}
           </Typography>
         )}
+
         {message.data.imageURL && (
           <MediaContainer>
             <StyledImage
               component="img"
               src={message.data.imageURL}
               alt="image"
+              onLoad={() => setLoaded(true)}
             ></StyledImage>
           </MediaContainer>
         )}
+
         {message.data.videoURL && (
           <MediaContainer>
             <video
@@ -43,10 +54,12 @@ const Message = ({ message, chatData }) => {
               muted
               playsInline
               src={message.data.videoURL}
+              onLoadedData={() => setLoaded(true)}
               style={{ maxHeight: "100%", maxWidth: "100%" }}
             />
           </MediaContainer>
         )}
+
         {message.data.sentBy === user.displayName && (
           <DeleteMessage message={message} chatData={chatData} />
         )}
