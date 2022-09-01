@@ -11,7 +11,7 @@
   background-clip: padding-box;
 }
 
-.my-masonry-grid-column > img {
+.my-masonry-grid-column > video {
   border: 3px solid transparent;
   border-radius: 5px;
   cursor: pointer;
@@ -19,6 +19,6 @@
   width: 100%;
 }
 
-.my-masonry-grid-column > img:hover {
+.my-masonry-grid-column > video:hover {
   border: 3px solid #5865f2;
 }

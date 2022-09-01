@@ -139,10 +139,13 @@ const SendGif = ({ chatData, updateChat }) => {
               }}
             >
               {gifs.map((gif) => (
-                <img
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   key={gif.id}
-                  src={gif.images.preview_webp.url}
-                  alt="gif"
+                  src={gif.images.preview.mp4}
                   onClick={() => saveGifMessage(gif)}
                 />
               ))}
