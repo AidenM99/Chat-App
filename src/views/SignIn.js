@@ -1,7 +1,11 @@
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { db, provider } from "../firebase";
 import { Box, Button } from "@mui/material";
-import { getAuth, signInWithPopup, signInAnonymously } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const SignIn = () => {
@@ -21,7 +25,11 @@ const SignIn = () => {
     try {
       const auth = getAuth();
 
-      const data = await signInAnonymously(auth);
+      const data = await signInWithEmailAndPassword(
+        auth,
+        "TestAccount@gmail.com",
+        "TestAccount"
+      );
 
       isExistingUser(data);
     } catch (err) {

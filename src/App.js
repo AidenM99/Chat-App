@@ -2,7 +2,7 @@ import SignIn from "./views/SignIn";
 import Loading from "./views/Loading";
 import Dashboard from "./views/Dashboard";
 import { getAuth } from "firebase/auth";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CssBaseline } from "@mui/material";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -13,6 +13,12 @@ import { UserContext, ColorModeContext } from "./hooks/Context";
 function App() {
   const [user, loading] = useAuthState(getAuth());
   const [mode, setMode] = useState(getThemePref() ? getThemePref() : "dark");
+
+  useEffect(() => {
+    if (user && user.uid === "iLzcI4NkQkWILsSnTNXELAirrg62") {
+      user.displayName = "Test Account";
+    }
+  }, [user]);
 
   const colorMode = useMemo(
     () => ({
@@ -40,11 +46,6 @@ function App() {
     );
   }
   if (user) {
-    if (user.isAnonymous === true) {
-      const guestIdentifier = Math.floor(1000 + Math.random() * 9000);
-
-      user.displayName = `Guest User#${guestIdentifier}`;
-    }
     return (
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
